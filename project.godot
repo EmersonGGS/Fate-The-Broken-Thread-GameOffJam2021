@@ -11,13 +11,7 @@ config_version=4
 [application]
 
 config/name="GameOffJam2021"
-run/main_scene="res://Scenes/PrototypeRoom.tscn"
 config/icon="res://icon.png"
-
-[display]
-
-window/size/width=1920
-window/size/height=1080
 
 [physics]
 
