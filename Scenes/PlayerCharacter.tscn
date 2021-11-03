@@ -18,6 +18,7 @@ script = ExtResource( 3 )
 [node name="Player" type="AnimatedSprite" parent="."]
 position = Vector2( 502.37, 436.791 )
 frames = SubResource( 1 )
+speed_scale = 100.0
 
 [node name="Light2D" type="Light2D" parent="Player"]
 texture = ExtResource( 2 )
