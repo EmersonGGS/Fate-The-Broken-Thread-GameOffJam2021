@@ -12,6 +12,7 @@ script = ExtResource( 3 )
 max_movement_speed = 20
 
 [node name="Background" type="RigidBody2D" parent="."]
+visible = false
 position = Vector2( -1463.69, 0 )
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
@@ -32,5 +33,5 @@ __meta__ = {
 position = Vector2( 312.716, 91.5968 )
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 4 )]
-position = Vector2( -34.8838, 161.929 )
+position = Vector2( -498.642, 182.065 )
 collision_layer = 9

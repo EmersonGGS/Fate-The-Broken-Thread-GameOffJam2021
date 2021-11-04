@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="GameOffJam2021"
-run/main_scene="res://Scenes/PrototypeRoom.tscn"
+run/main_scene="res://Levels/LevelTemplate.tscn"
 config/icon="res://icon.png"
 
 [display]
