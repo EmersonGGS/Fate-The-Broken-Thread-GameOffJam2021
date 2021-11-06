@@ -7,9 +7,27 @@ export var speed = Vector2(300.0, 1000.0)
 export var gravity = 1.0;
 const JUMPFORCE = -1200;
 
+const attackAnimations = [
+	"overhandSwing",
+	"underhandSwing",
+	"stab"
+];
+
+const playerStates = {
+	"IDLE": "IDLE",
+	"ATTACKING": "ATTACKING"
+};
+
+var playerState = playerStates.IDLE
+
 onready var animatedSprite = $AnimatedSprite
 
 func _physics_process(delta: float) -> void:
+	# Attack is taking place
+	if Input.is_action_just_pressed("attack") and is_on_floor():
+		playerState = playerStates.ATTACKING
+		handle_attack()
+	elif playerState != playerStates.ATTACKING:
 		var direction = getDirection();
 		velocity = calculate_move_velocity(velocity, direction, speed)
 		if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -21,18 +39,31 @@ func getDirection() -> Vector2:
 	# Movement direction of player, < 0 is moving right, 0 is stationary, < 0 is moving left
 	var direction = Input.get_action_strength("right") - Input.get_action_strength("left")
 
+
 	# Update the direction
 	return Vector2(direction, -1.0)
 
 func calculate_move_velocity(linear_velocity: Vector2, speed: Vector2, direction: Vector2) -> Vector2:
 	var calculated_velocity = linear_velocity
-	calculated_velocity.x = speed.x * direction.x
+	
+	# Reduce speed control while in the air
+	if calculated_velocity.y != 0:
+		calculated_velocity.x = (speed.x / 1.25) * direction.x
+	else:
+		calculated_velocity.x = speed.x * direction.x
 	calculated_velocity.y += gravity * get_physics_process_delta_time()
 	if direction.y == -1.0:
 		calculated_velocity.y = speed.y * direction.y
 
 	return calculated_velocity
 
+func handle_attack() -> void:
+	#var randomNumberGenerator = RandomNumberGenerator.new()
+	#var randomAttackAnimation = randomNumberGenerator.randi_range(0, attackAnimations.size);
+	#print(randomNumberGenerator)
+	animatedSprite.animation = "stab"
+	if animatedSprite.playing == false:
+		animatedSprite.play()
 
 func handle_animated_sprite_state() -> void:
 	# Handle animation direction
@@ -46,20 +77,24 @@ func handle_animated_sprite_state() -> void:
 	# Handle animation type
 	# Running (on ground)
 	if velocity.x != 0 and velocity.y == 0 :
-		animatedSprite.animation = "Running"
-
-	# Jumping (initial lift-off)
-	elif velocity.y != 0 && Input.is_action_just_pressed("jump"):
-		animatedSprite.animation = "Jumping"
+		animatedSprite.animation = "running"
 
 	# Jumping
 	elif velocity.y != 0:
-		animatedSprite.animation = "Falling"
+		animatedSprite.animation = "falling"
 
 	# Not moving
 	else:
-		animatedSprite.animation = "Idle"
+		animatedSprite.animation = "idle"
 
 	# If animated sprite is not playing, play it
 	if animatedSprite.playing == false:
 		animatedSprite.play()
+
+
+func _on_AnimatedSprite_animation_finished():
+	var isAnimationAnAttack = attackAnimations.find(animatedSprite.animation, 0);
+	if isAnimationAnAttack > 0:
+		playerState = playerStates.IDLE
+		print(isAnimationAnAttack)
+	pass # Replace with function body.

@@ -32,6 +32,9 @@ current = true
 position = Vector2( 115.559, 405.432 )
 scale = Vector2( 1.5, 1.5 )
 frames = ExtResource( 2 )
-animation = "Landing"
+animation = "underhandSwing"
+frame = 3
 playing = true
 centered = false
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
