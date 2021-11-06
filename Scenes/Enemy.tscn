@@ -72,6 +72,7 @@ script = ExtResource( 1 )
 [node name="EnemySprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 11 )
 animation = "Standing"
+frame = 1
 playing = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
