@@ -1,106 +1,11 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/PlayerMovement.gd" type="Script" id=1]
-[ext_resource path="res://Assets/DSKnight/Idle.png" type="Texture" id=2]
+[ext_resource path="res://Animations/Player/PlayerAnimation.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Assets/Player/LanternLightTexture.png" type="Texture" id=3]
-[ext_resource path="res://Assets/DSKnight/Run.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/AnimatedSprite.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 23.9357, 30.6204 )
-
-[sub_resource type="AtlasTexture" id=2]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=3]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 128, 0, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=4]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 64, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=5]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 128, 64, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=6]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 128, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=7]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 128, 128, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=8]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 192, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=9]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 128, 192, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=10]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=11]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 128, 0, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=12]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 64, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=13]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 128, 64, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=14]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 128, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=15]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 128, 128, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=16]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 192, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=17]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 128, 192, 128, 64 )
-
-[sub_resource type="SpriteFrames" id=18]
-animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 6.0
-}, {
-"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
-"loop": true,
-"name": "Running",
-"speed": 12.0
-} ]
+extents = Vector2( 19.5406, 28.8523 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 228.16, 155.563 )
@@ -111,8 +16,7 @@ position = Vector2( 208.738, 466.891 )
 shape = SubResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
-visible = false
-position = Vector2( 211.755, 445.061 )
+position = Vector2( 208.738, 445.061 )
 scale = Vector2( 0.8937, 0.781872 )
 texture = ExtResource( 3 )
 color = Color( 0.815686, 0.819608, 0.0941176, 1 )
@@ -121,14 +25,13 @@ shadow_enabled = true
 shadow_item_cull_mask = 513
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 208.738, 473.391 )
+position = Vector2( 208.738, 466.891 )
 current = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 110.783, 400.657 )
+position = Vector2( 115.559, 405.432 )
 scale = Vector2( 1.5, 1.5 )
-frames = SubResource( 18 )
-animation = "Idle"
-frame = 2
+frames = ExtResource( 2 )
+animation = "Landing"
+playing = true
 centered = false
-script = ExtResource( 5 )

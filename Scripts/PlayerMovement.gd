@@ -15,30 +15,12 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = JUMPFORCE
 		velocity = move_and_slide(velocity, Vector2.UP)
+		handle_animated_sprite_state()
 
 func getDirection() -> Vector2:
 	# Movement direction of player, < 0 is moving right, 0 is stationary, < 0 is moving left
 	var direction = Input.get_action_strength("right") - Input.get_action_strength("left")
-	
-	# Handle animation direction
-	# Running right
-	if direction > 0 :
-		animatedSprite.animation = "Running"
-		animatedSprite.flip_h = false
 
-	# Running left
-	elif direction < 0:
-		animatedSprite.animation = "Running"
-		animatedSprite.flip_h = true
-
-	# Not moving
-	else:
-		animatedSprite.animation = "Idle"
-
-	# If animated sprite is not playing, play it
-	if animatedSprite.playing == false:
-		animatedSprite.play()
-		
 	# Update the direction
 	return Vector2(direction, -1.0)
 
@@ -50,3 +32,34 @@ func calculate_move_velocity(linear_velocity: Vector2, speed: Vector2, direction
 		calculated_velocity.y = speed.y * direction.y
 
 	return calculated_velocity
+
+
+func handle_animated_sprite_state() -> void:
+	# Handle animation direction
+	# Facing right
+	if velocity.x > 0:
+		animatedSprite.flip_h = false
+	# Facing left
+	elif velocity.x < 0:
+		animatedSprite.flip_h = true
+	
+	# Handle animation type
+	# Running (on ground)
+	if velocity.x != 0 and velocity.y == 0 :
+		animatedSprite.animation = "Running"
+
+	# Jumping (initial lift-off)
+	elif velocity.y != 0 && Input.is_action_just_pressed("jump"):
+		animatedSprite.animation = "Jumping"
+
+	# Jumping
+	elif velocity.y != 0:
+		animatedSprite.animation = "Falling"
+
+	# Not moving
+	else:
+		animatedSprite.animation = "Idle"
+
+	# If animated sprite is not playing, play it
+	if animatedSprite.playing == false:
+		animatedSprite.play()
