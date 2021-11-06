@@ -4,27 +4,30 @@ var velocity = Vector2.ZERO;
 
 export var speed = Vector2(300.0, 1000.0)
 
-export var gravity = 3000.0;
+export var gravity = 1000.0;
+const JUMPFORCE = -1200;
 
 func _ready():
 	$AnimationPlayer.play("Idle")
-	
-
-func get_input():
-	velocity = Vector2()
-	if Input.is_action_pressed("right"):
-		velocity.x += 1
-	if Input.is_action_pressed("left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("down"):
-		velocity.y += 1
-	if Input.is_action_pressed("space"):
-		velocity.y -= 1
-	velocity = velocity.normalized() * speed
 
 func _physics_process(delta: float) -> void:
-		get_input()
-		velocity.y += gravity * delta
-		velocity.y = max(velocity.y, speed.y)
-		velocity = move_and_slide(velocity)
+		var direction = getDirection();
+		velocity = calculate_move_velocity(velocity, direction, speed)
+		if Input.is_action_just_pressed("jump") and is_on_floor():
+			velocity.y = JUMPFORCE
+		velocity = move_and_slide(velocity, Vector2.UP)
 
+func getDirection() -> Vector2:
+	return Vector2(
+		Input.get_action_strength("right") - Input.get_action_strength("left"),
+		-1.0
+	)
+
+func calculate_move_velocity(linear_velocity: Vector2, speed: Vector2, direction: Vector2) -> Vector2:
+	var calculated_velocity = linear_velocity
+	calculated_velocity.x = speed.x * direction.x
+	calculated_velocity.y += gravity * get_physics_process_delta_time()
+	if direction.y == -1.0:
+		calculated_velocity.y = speed.y * direction.y
+	print(calculated_velocity)
+	return calculated_velocity
