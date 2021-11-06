@@ -4,11 +4,9 @@ var velocity = Vector2.ZERO;
 
 export var speed = Vector2(300.0, 1000.0)
 
-export var gravity = 1000.0;
+export var gravity = 1.0;
 const JUMPFORCE = -1200;
 
-func _ready():
-	$AnimationPlayer.play("Idle")
 
 func _physics_process(delta: float) -> void:
 		var direction = getDirection();
