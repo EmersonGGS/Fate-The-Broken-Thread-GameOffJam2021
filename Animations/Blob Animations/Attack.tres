@@ -1,0 +1,48 @@
+[gd_resource type="Animation" load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Enemies/Blob/Attack/Attack_04.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Enemies/Blob/Attack/Attack_02.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Enemies/Blob/Attack/Attack_05.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Enemies/Blob/Attack/Attack_06.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Enemies/Blob/Attack/Attack_03.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Enemies/Blob/Attack/Attack_01.png" type="Texture" id=6]
+
+[resource]
+resource_name = "Attack"
+length = 1.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("EnemySprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 6 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionPolygon2D:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ PoolVector2Array( -0.0807829, 26.9276, 17.0361, 25.8946, 19.1527, 22.9249, 18.6005, 13.7573, 13.6311, 2.26556, 9.12182, 0.586992, 4.98065, 1.74908, 1.48366, 4.84798, 0.379347, 9.75456, -2.28941, 14.9194, -2.38143, 22.4084 ), PoolVector2Array( -0.0807829, 26.9276, 17.0361, 25.8946, 19.8889, 19.3095, 17.8643, 14.9194, 17.8643, 10.5293, 19.7048, 8.33423, 17.9563, 4.71885, 17.5882, 1.10348, 12.1587, -5.99816, 3.23215, -6.2564, -2.56549, 2.39468, -2.84156, 6.13918, -3.85385, 11.304, -1.73725, 14.6611, -1.36915, 18.4057, -2.38143, 22.4084 ), PoolVector2Array( -0.0807829, 26.9276, 17.9563, 26.282, 19.7968, 23.9578, 19.8889, 19.3095, 17.4962, 17.1144, 17.5882, 6.78479, 19.5208, 6.39742, 20.165, 2.65292, 18.1404, -2.5119, 11.0544, -10.3883, 2.03582, -8.45145, -5.69437, 0.457872, -5.51032, 4.9771, -6.1545, 9.3672, -3.85385, 11.8205, -1.73725, 17.8892, -2.38143, 22.4084 ), PoolVector2Array( -2.47346, 26.9276, 18.9686, 26.7985, 20.5331, 24.4743, 24.8583, 15.6941, 24.5822, 13.3699, 25.1344, 11.0458, 23.0178, 7.94687, 25.1344, 5.36446, 28.6313, 3.04029, 26.9749, -0.962454, 23.846, 2.91117, 22.9257, 5.36446, 21.7294, 0.974356, 19.7048, 0.586994, 19.4287, 7.30127, 17.4042, 8.59248, 13.6311, 14.4029, 7.2813, 14.7903, 1.39163, 12.7243, 1.66772, 3.68589, -1.64523, 3.94413, -2.19738, 10.0128, -5.05019, 9.75456, -6.24653, 7.17215, -7.53489, 3.29853, -9.55947, 4.84798, -9.46744, 8.7216, -7.53489, 12.8535, -8.91528, 15.1776, -9.46744, 18.1474 ), PoolVector2Array( -2.47346, 26.9276, 18.9686, 26.7985, 20.5331, 24.4743, 22.3736, 18.2765, 21.5453, 14.4029, 19.9809, 12.0787, 15.7477, 8.07599, 12.9869, 7.68863, 8.01752, 6.39743, 1.48366, 10.7875, -4.68208, 15.8232, -4.49803, 18.1474, -5.32626, 21.7628, -4.95816, 23.6996 ), PoolVector2Array( -2.47346, 26.9276, 18.9686, 26.7985, 20.5331, 24.4743, 21.2693, 17.76, 20.257, 14.532, 20.6251, 11.0458, 17.7723, 6.65567, 14.4593, 3.81501, 2.95608, 3.94413, -2.74954, 11.8205, -3.85385, 13.3699, -3.76182, 16.2106, -5.32626, 18.9221, -4.95816, 23.6996 ), PoolVector2Array( -0.0807829, 26.9276, 17.0361, 25.8946, 19.1527, 22.9249, 18.6005, 13.7573, 13.6311, 2.26556, 9.12182, 0.586992, 4.98065, 1.74908, 1.48366, 4.84798, 0.379347, 9.75456, -2.28941, 14.9194, -2.38143, 22.4084 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackDetector:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.7, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, true, false ]
+}
