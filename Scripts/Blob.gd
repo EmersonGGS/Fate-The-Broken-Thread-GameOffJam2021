@@ -112,7 +112,7 @@ func _physics_process(delta):
 		velocity.y = 0
 	if animationPlayer.current_animation == "Walk":
 		var timeStamp = animationPlayer.get_current_animation_position();
-		print (timeStamp)
+#		print (timeStamp)
 		if timeStamp >= 0.6 and timeStamp <= 1.3:
 			if state == left:
 				velocity.x = -speed.x
