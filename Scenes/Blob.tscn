@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Blob.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Enemies/Blob/Attack_Wave.png" type="Texture" id=2]
 [ext_resource path="res://Animations/Blob Animations/Death.tres" type="Animation" id=3]
 [ext_resource path="res://Animations/Blob Animations/Walk.tres" type="Animation" id=4]
@@ -81,6 +81,9 @@ shape = SubResource( 1 )
 [node name="AttackDetector" type="Area2D" parent="."]
 visible = false
 position = Vector2( 21.9231, -0.76923 )
+monitoring = false
+collision_layer = 524289
+collision_mask = 524289
 
 [node name="AttackWave" type="AnimatedSprite" parent="AttackDetector"]
 frames = SubResource( 2 )
@@ -101,4 +104,5 @@ anims/Walk = ExtResource( 4 )
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_DecisionTimer_timeout"]
 [connection signal="timeout" from="MovementTimer" to="." method="_on_MovementTimer_timeout"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_entered" from="AttackDetector" to="." method="_on_AttackDetector_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

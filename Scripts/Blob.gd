@@ -16,7 +16,7 @@ var velocity = Vector2.ZERO;
 
 export var enemyScale = 1.3
 
-export var speed = Vector2(95.0, 10.0)
+export var speed = Vector2(150.0, 10.0)
 export var gravity = 1000.0;
 
 
@@ -111,10 +111,16 @@ func _physics_process(delta):
 	if is_on_floor():
 		velocity.y = 0
 	if animationPlayer.current_animation == "Walk":
-		if state == left:
-			velocity.x = -speed.x
-		elif state == right:
-			velocity.x = speed.x
+		var timeStamp = animationPlayer.get_current_animation_position();
+		print (timeStamp)
+		if timeStamp >= 0.6 and timeStamp <= 1.3:
+			if state == left:
+				velocity.x = -speed.x
+				velocity.y = 0
+			elif state == right:
+				velocity.x = speed.x
+				velocity.y = 0
+		else: velocity.x = 0
 	else: velocity.x = 0
 	move_and_slide(velocity, Vector2(0, -1))
 
@@ -180,4 +186,11 @@ func _on_PlayerDetector_body_entered(body):
 		attack();
 	pass # Replace with function body.
 		
+	pass # Replace with function body.
+
+
+func _on_AttackDetector_body_entered(body):
+	if body.name == "Player":
+		print ("Placeholder for Damage")
+		##
 	pass # Replace with function body.
