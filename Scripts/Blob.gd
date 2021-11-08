@@ -35,7 +35,8 @@ func enemy_decision ():
 	var decision = round(rand_range(0,8));
 	var holeInFront = hole_in_front();
 	var holeInBack = hole_in_back();
-	
+	var playerDetection = locate_player()
+	#Checking for holes first. If there is a hole, we shouldn't care about the next direction
 	if holeInFront and holeInBack:
 		animationPlayer.play("Idle")
 		print ("Idle")
@@ -56,8 +57,8 @@ func enemy_decision ():
 				move_left();
 		else: animationPlayer.play("Idle"); print ("Idle")
 		
-	var playerDetection = locate_player()
-	if playerDetection != null:
+	
+	elif playerDetection != null:
 		if playerDetection == left:
 			move_left();
 		elif playerDetection == right:
@@ -103,10 +104,7 @@ func _ready():
 	animationPlayer.play("Idle")
 	
 
-var framesToMove = 50
-var framesCounted = 0
 func _physics_process(delta):
-	locate_player()
 	velocity.y += delta * gravity
 	if is_on_floor():
 		velocity.y = 0
