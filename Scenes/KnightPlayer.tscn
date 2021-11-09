@@ -33,7 +33,7 @@ position = Vector2( 115.559, 405.432 )
 scale = Vector2( 1.5, 1.5 )
 frames = ExtResource( 2 )
 animation = "underhandSwing"
-frame = 3
+frame = 5
 playing = true
 centered = false
 

@@ -61,7 +61,13 @@ func handle_attack() -> void:
 	#var randomNumberGenerator = RandomNumberGenerator.new()
 	#var randomAttackAnimation = randomNumberGenerator.randi_range(0, attackAnimations.size);
 	#print(randomNumberGenerator)
-	animatedSprite.animation = "stab"
+	if animatedSprite.animation == "stab":
+		animatedSprite.animation = "overhandSwing"
+	elif animatedSprite.animation == "overhandSwing":
+		animatedSprite.animation = "underhandSwing"
+	else:
+		animatedSprite.animation = "stab"
+
 	if animatedSprite.playing == false:
 		animatedSprite.play()
 
