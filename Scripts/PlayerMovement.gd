@@ -2,10 +2,10 @@ extends KinematicBody2D
 
 var velocity = Vector2.ZERO;
 
-export var speed = Vector2(300.0, 1000.0)
+export var speed = Vector2(500.0, 500.0)
 
 export var gravity = 1.0;
-const JUMPFORCE = -1200;
+const JUMPFORCE = -850;
 
 const attackAnimations = [
 	"overhandSwing",
@@ -21,6 +21,9 @@ const playerStates = {
 var playerState = playerStates.IDLE
 
 onready var animatedSprite = $AnimatedSprite
+
+func _ready():
+	$AnimationPlayer.play("Idle");
 
 func _physics_process(delta: float) -> void:
 	# Attack is taking place
@@ -47,10 +50,7 @@ func calculate_move_velocity(linear_velocity: Vector2, speed: Vector2, direction
 	var calculated_velocity = linear_velocity
 	
 	# Reduce speed control while in the air
-	if calculated_velocity.y != 0:
-		calculated_velocity.x = (speed.x / 1.25) * direction.x
-	else:
-		calculated_velocity.x = speed.x * direction.x
+	calculated_velocity.x = speed.x * direction.x
 	calculated_velocity.y += gravity * get_physics_process_delta_time()
 	if direction.y == -1.0:
 		calculated_velocity.y = speed.y * direction.y
