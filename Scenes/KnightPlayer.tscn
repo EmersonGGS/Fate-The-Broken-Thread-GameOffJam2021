@@ -1,12 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Player/PlayerAnimation.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Assets/Player/LanternLightTexture.png" type="Texture" id=3]
 [ext_resource path="res://Materials/LightCanvasMaterial.tres" type="Material" id=4]
-[ext_resource path="res://Assets/DSKnight/Run.png" type="Texture" id=5]
+[ext_resource path="res://Assets/DSKnight/idle/tile003.png" type="Texture" id=5]
 [ext_resource path="res://Animations/Player/idle.tres" type="Animation" id=6]
-[ext_resource path="res://Animations/Player/run.tres" type="Animation" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.5406, 28.8523 )
@@ -39,9 +38,6 @@ shadow_item_cull_mask = 513
 position = Vector2( 208.738, 455.395 )
 scale = Vector2( 1.25, 1.25 )
 texture = ExtResource( 5 )
-hframes = 2
-vframes = 4
-frame = 4
 
 [node name="Area2D" type="Area2D" parent="Sprite"]
 position = Vector2( -208.738, -466.891 )
@@ -49,10 +45,6 @@ position = Vector2( -208.738, -466.891 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
 position = Vector2( 242.995, 466.891 )
 shape = SubResource( 2 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Idle = ExtResource( 6 )
-anims/Run = ExtResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 visible = false
@@ -63,5 +55,8 @@ animation = "underhandSwing"
 frame = 5
 playing = true
 centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = ExtResource( 6 )
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

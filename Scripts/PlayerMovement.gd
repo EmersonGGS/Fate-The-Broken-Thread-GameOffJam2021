@@ -23,7 +23,7 @@ var playerState = playerStates.IDLE
 onready var animatedSprite = $AnimatedSprite
 
 func _ready():
-	$AnimationPlayer.play("Idle");
+	$AnimationPlayer.play("idle");
 
 func _physics_process(delta: float) -> void:
 	# Attack is taking place
