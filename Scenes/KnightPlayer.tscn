@@ -34,6 +34,7 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
+light_mask = 786433
 material = ExtResource( 4 )
 scale = Vector2( 10.7684, 10.7684 )
 texture = ExtResource( 3 )

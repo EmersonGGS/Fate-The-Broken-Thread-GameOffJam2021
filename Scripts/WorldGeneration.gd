@@ -4,6 +4,7 @@ onready var tileMap = $TileMap
 export (int) var maxx = 100
 export (int) var maxy = 100
 
+
 onready var startingRoom = $"Starting Area"
 onready var hallway = $Hallway
 onready var NS = $"N&S"
@@ -16,10 +17,58 @@ onready var EN = $"E&N"
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+onready var roomTypes = {
+	start = {
+	object = startingRoom,
+	inDirections =[direction.West],
+	outDirections = [direction.East]
+	
+	},
+	hall = {
+	object = hallway,
+	inDirections =[direction.West,direction.East],
+	outDirections = [direction.East,direction.West]
+	},
+	NorthSouth = {
+	object = NS,
+	inDirections = [direction.South,direction.North],
+	outDirections = [direction.North,direction.South]
+	},
+	NorthEastSouth = {
+	object = NES,
+	inDirections =[direction.South,direction.West,direction.North],
+	outDirections = [direction.North,direction.East,direction.South]
+	},
+	NorthWestSouth = {
+	object = NWS,
+	inDirections =[direction.South,direction.East,direction.North],
+	outDirections = [direction.North,direction.West,direction.South]
+	},
+	WestSouth = {
+	object = WS,
+	inDirections =[direction.East,direction.North],
+	outDirections = [direction.West,direction.South]
+	},
+	WestNorth = {
+	object = WN,
+	inDirections = [direction.South,direction.East],
+	outDirections = [direction.West,direction.North]
+	},
+	EastSouth = {
+	object = ES,
+	inDirections =[direction.West,direction.North],
+	outDirections = [direction.East,direction.South]
+	},
+	EastNorth = {
+	object = EN,
+	inDirections =[direction.South,direction.West],
+	outDirections = [direction.East,direction.North]
+	},
+}
 export (Vector2) var gridSize = Vector2(4,4)
 
-var roomSize = Vector2(25,23)
+var roomSize = Vector2(25,25)
+var tilePixelSize = Vector2(64,64)
 var map = []
 var startPOS = Vector2()
 enum direction{North,East,South,West}
@@ -64,10 +113,26 @@ func buildCorePath (pointA,gridDimensions = gridSize, pointB = null):
 	var lastPOS = startPOS
 	var nextPos
 	var currentDirection = direction.East
-	var mainPath = find_path_through_empty_rooms(roomCount,lastPOS)
+	var mainPath = find_path_through_empty_rooms(roomCount,lastPOS,currentDirection)
 
 	for i in mainPath.size():
-		map[mainPath[i].x][mainPath[i].y]=true
+		var roomOpenings = mainPath[i][1]
+		var roomChoices = roomTypes
+		var viableRoomTypes = []
+		var roomKeys = roomTypes.keys()
+		for j in roomKeys.size():
+			if j == 0:
+				pass
+			else:
+				if array1_matches_all(roomOpenings,roomTypes[roomKeys[j]].outDirections):
+					viableRoomTypes.append(roomTypes[roomKeys[j]].object)
+		if !viableRoomTypes.empty():
+			var chooseRoomType = round(rand_range(0,viableRoomTypes.size()-1))
+			var room = viableRoomTypes[chooseRoomType].duplicate()
+			room.show()
+			room.position = mainPath[i][0]*tilePixelSize*roomSize
+			map[mainPath[i][0].x][mainPath[i][0].y]= room
+			
 	
 	print_grid(map)
 #	for i in roomCount:
@@ -85,7 +150,7 @@ func buildCorePath (pointA,gridDimensions = gridSize, pointB = null):
 #			pass
 		
 	
-func find_path_through_empty_rooms (totalRoomsToDo, lastPOS, roomCount=0, chosenRooms = [], rooms=map.duplicate()):
+func find_path_through_empty_rooms (totalRoomsToDo, lastPOS,lastDirection, roomCount=0, chosenRooms = [], rooms=map.duplicate()):
 	
 	if totalRoomsToDo <= roomCount:
 		return chosenRooms
@@ -117,12 +182,12 @@ func find_path_through_empty_rooms (totalRoomsToDo, lastPOS, roomCount=0, chosen
 		if rooms[nextRoomPOS.x][nextRoomPOS.y] == null:
 			rooms[nextRoomPOS.x][nextRoomPOS.y] = true
 			if roomCount + 1 >= totalRoomsToDo:
-				chosenRooms.append(nextRoomPOS)
+				chosenRooms.append([nextRoomPOS,[lastDirection,roomToChoose]])
 				print ("chosenRooms in iteration:", chosenRooms)
 				return chosenRooms
 #			print (chosenRooms.append(nextRoomPOS))
-			chosenRooms.append(nextRoomPOS)
-			var newValue = find_path_through_empty_rooms(totalRoomsToDo,nextRoomPOS,roomCount+1,chosenRooms, rooms.duplicate())
+			chosenRooms.append([nextRoomPOS,[lastDirection,roomToChoose]])
+			var newValue = find_path_through_empty_rooms(totalRoomsToDo,nextRoomPOS,roomToChoose,roomCount+1,chosenRooms, rooms.duplicate())
 			print (newValue)
 			if newValue !=null:
 				if newValue.size() >= roomCount:
@@ -143,8 +208,11 @@ func find_path_through_empty_rooms (totalRoomsToDo, lastPOS, roomCount=0, chosen
 		
 #	return false
 
-
-	
+func array1_matches_all (array1, array2):
+	for i in array1.size():
+		if !array2.has(array1[i]):
+			return false
+	return true	
 func print_grid(gridToPrint):
 	for i in gridToPrint.size():
 		var string = "("

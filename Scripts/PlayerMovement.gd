@@ -9,7 +9,7 @@ const JUMPFORCE = -1200;
 
 func _ready():
 	$AnimationPlayer.play("Idle")
-	Tester.make_border(2)
+#	Tester.make_border(2)
 
 func _physics_process(delta: float) -> void:
 		var direction = getDirection();

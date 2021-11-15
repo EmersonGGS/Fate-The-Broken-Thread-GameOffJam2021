@@ -22,7 +22,6 @@ noise = SubResource( 1 )
 script = ExtResource( 3 )
 
 [node name="CloudBacking" type="Sprite" parent="."]
-visible = false
 material = ExtResource( 4 )
 position = Vector2( 4979.45, 3033.48 )
 scale = Vector2( 3.32312, 3.04506 )
