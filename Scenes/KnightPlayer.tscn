@@ -36,7 +36,7 @@ shape = SubResource( 1 )
 [node name="Light2D" type="Light2D" parent="."]
 light_mask = 786433
 material = ExtResource( 4 )
-scale = Vector2( 10.7684, 10.7684 )
+scale = Vector2( 200, 200 )
 texture = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -50,3 +50,4 @@ anims/Idle = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 150, 150 )

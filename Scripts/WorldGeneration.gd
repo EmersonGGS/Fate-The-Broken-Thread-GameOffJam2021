@@ -14,6 +14,7 @@ onready var WS = $"W&S"
 onready var WN = $"W&N"
 onready var ES = $"E&S"
 onready var EN = $"E&N"
+onready var NESW = $"4Way"
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -63,6 +64,11 @@ onready var roomTypes = {
 	object = EN,
 	inDirections =[direction.South,direction.West],
 	outDirections = [direction.East,direction.North]
+	},
+	All4 = {
+	object = NESW,
+	inDirections =[direction.North,direction.East,direction.South,direction.West],
+	outDirections = [direction.North,direction.East,direction.South,direction.West]
 	},
 }
 export (Vector2) var gridSize = Vector2(4,4)
@@ -132,7 +138,8 @@ func buildCorePath (pointA,gridDimensions = gridSize, pointB = null):
 			room.show()
 			room.position = mainPath[i][0]*tilePixelSize*roomSize
 			map[mainPath[i][0].x][mainPath[i][0].y]= room
-			
+			add_child(room)
+		else: print("No Viable room types in buildCorePath")
 	
 	print_grid(map)
 #	for i in roomCount:

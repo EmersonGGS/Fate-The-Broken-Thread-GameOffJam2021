@@ -28,7 +28,7 @@ scale = Vector2( 3.32312, 3.04506 )
 texture = SubResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 68.47, 132.834 )
+position = Vector2( 203.399, 169.344 )
 collision_mask = 8
 speed = Vector2( 800, 1400 )
 gravity = 4000.0
