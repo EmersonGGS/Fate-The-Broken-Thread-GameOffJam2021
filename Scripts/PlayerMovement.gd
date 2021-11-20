@@ -7,23 +7,36 @@ export var speed = Vector2(500.0, 500.0)
 export var gravity = 1.0;
 const JUMPFORCE = -850;
 
+# Player attack options
 const attackAnimations = [
-	"overhandSwing",
-	"underhandSwing",
-	"stab"
+	"overhand",
+	"stab",
+	"heavyAttack"
 ];
 
+# Player state options
 const playerStates = {
 	"IDLE": "IDLE",
 	"ATTACKING": "ATTACKING"
 };
 
+# Current player state
 var playerState = playerStates.IDLE
 
-onready var animatedSprite = $AnimatedSprite
+# Attack animation index
+var playerAttackIndex = 0;
+var playerAttackInProgress = false;
+
+# Sprite/animation variables
+var characterSprite
+var characterSpriteAnimationPlayer
+
+var attackTimneout;
 
 func _ready():
-	$AnimationPlayer.play("idle");
+	characterSprite = $CharacterSprite
+	characterSpriteAnimationPlayer = $CharacterSpriteAnimationPlayer
+	characterSpriteAnimationPlayer.play("idle");
 
 func _physics_process(delta: float) -> void:
 	# Attack is taking place
@@ -58,49 +71,60 @@ func calculate_move_velocity(linear_velocity: Vector2, speed: Vector2, direction
 	return calculated_velocity
 
 func handle_attack() -> void:
-	#var randomNumberGenerator = RandomNumberGenerator.new()
-	#var randomAttackAnimation = randomNumberGenerator.randi_range(0, attackAnimations.size);
-	#print(randomNumberGenerator)
-	if animatedSprite.animation == "stab":
-		animatedSprite.animation = "overhandSwing"
-	elif animatedSprite.animation == "overhandSwing":
-		animatedSprite.animation = "underhandSwing"
-	else:
-		animatedSprite.animation = "stab"
-
-	if animatedSprite.playing == false:
-		animatedSprite.play()
+	print(playerAttackIndex)
+	#	Player is starting to attack
+	if !playerAttackInProgress or $attackTimer.time_left > 0:
+		$attackTimer.stop()
+		characterSpriteAnimationPlayer.play(attackAnimations[playerAttackIndex]);
+		playerAttackInProgress = true;
+		if playerAttackIndex == (attackAnimations.size() - 1):
+			playerAttackIndex = 0
+		else:
+			playerAttackIndex += 1
 
 func handle_animated_sprite_state() -> void:
 	# Handle animation direction
 	# Facing right
 	if velocity.x > 0:
-		animatedSprite.flip_h = false
+		characterSprite.flip_h = false;
 	# Facing left
 	elif velocity.x < 0:
-		animatedSprite.flip_h = true
+		characterSprite.flip_h = true;
 	
 	# Handle animation type
 	# Running (on ground)
 	if velocity.x != 0 and velocity.y == 0 :
-		animatedSprite.animation = "running"
-
-	# Jumping
+		characterSpriteAnimationPlayer.play("run");
+		
+	# Initial jump off the ground
+	elif Input.is_action_just_pressed("jump") and is_on_floor():
+		characterSpriteAnimationPlayer.play("jumpUp")
+	
+	# Falling
 	elif velocity.y != 0:
-		animatedSprite.animation = "falling"
+		characterSpriteAnimationPlayer.play("falling")
 
-	# Not moving
+	# Not moving (idle)
 	else:
-		animatedSprite.animation = "idle"
-
-	# If animated sprite is not playing, play it
-	if animatedSprite.playing == false:
-		animatedSprite.play()
+		characterSpriteAnimationPlayer.play("idle");
 
 
-func _on_AnimatedSprite_animation_finished():
-	var isAnimationAnAttack = attackAnimations.find(animatedSprite.animation, 0);
-	if isAnimationAnAttack > 0:
-		playerState = playerStates.IDLE
-		print(isAnimationAnAttack)
+func _on_CharacterSpriteAnimationPlayer_animation_finished(anim_name):
+	print(anim_name)
+	var isAnimationAnAttack = attackAnimations.find(anim_name, 0);
+	if isAnimationAnAttack >= 0:
+		print('Starting attack combo timer...')
+		$attackTimer.start()
+
+func clear_player_state():
+	print('clearing player state')
+	playerAttackInProgress = false;
+	playerState = playerStates.IDLE;
+	playerAttackIndex = 0;
+
+
+func _on_attackTimer_timeout():
+	$attackTimer.stop();
+	clear_player_state();
+	print('we timed out!');
 	pass # Replace with function body.

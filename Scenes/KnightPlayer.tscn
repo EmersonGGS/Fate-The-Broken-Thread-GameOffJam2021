@@ -1,11 +1,17 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/PlayerMovement.gd" type="Script" id=1]
-[ext_resource path="res://Animations/Player/PlayerAnimation.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Animations/Player/heavyAttack.tres" type="Animation" id=2]
 [ext_resource path="res://Assets/Player/LanternLightTexture.png" type="Texture" id=3]
 [ext_resource path="res://Materials/LightCanvasMaterial.tres" type="Material" id=4]
-[ext_resource path="res://Assets/DSKnight/idle/tile003.png" type="Texture" id=5]
+[ext_resource path="res://Animations/Player/falling.tres" type="Animation" id=5]
 [ext_resource path="res://Animations/Player/idle.tres" type="Animation" id=6]
+[ext_resource path="res://Animations/Player/run.tres" type="Animation" id=7]
+[ext_resource path="res://Animations/Player/jumpLand.tres" type="Animation" id=8]
+[ext_resource path="res://Animations/Player/stab.tres" type="Animation" id=9]
+[ext_resource path="res://Animations/Player/jumpUp.tres" type="Animation" id=10]
+[ext_resource path="res://Animations/Player/overhand.tres" type="Animation" id=11]
+[ext_resource path="res://Assets/DSKnight/overhand/tile007.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.5406, 28.8523 )
@@ -34,29 +40,31 @@ range_height = 264.3
 shadow_enabled = true
 shadow_item_cull_mask = 513
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="CharacterSprite" type="Sprite" parent="."]
 position = Vector2( 208.738, 455.395 )
 scale = Vector2( 1.25, 1.25 )
-texture = ExtResource( 5 )
+texture = ExtResource( 12 )
 
-[node name="Area2D" type="Area2D" parent="Sprite"]
+[node name="Area2D" type="Area2D" parent="CharacterSprite"]
 position = Vector2( -208.738, -466.891 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterSprite/Area2D"]
 position = Vector2( 242.995, 466.891 )
 shape = SubResource( 2 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-visible = false
-position = Vector2( 115.559, 405.432 )
-scale = Vector2( 1.5, 1.5 )
-frames = ExtResource( 2 )
-animation = "underhandSwing"
-frame = 5
-playing = true
-centered = false
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="CharacterSpriteAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/falling = ExtResource( 5 )
+anims/heavyAttack = ExtResource( 2 )
 anims/idle = ExtResource( 6 )
+anims/jumpLand = ExtResource( 8 )
+anims/jumpUp = ExtResource( 10 )
+anims/overhand = ExtResource( 11 )
+anims/run = ExtResource( 7 )
+anims/stab = ExtResource( 9 )
 
-[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[node name="attackTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[connection signal="animation_finished" from="CharacterSpriteAnimationPlayer" to="." method="_on_CharacterSpriteAnimationPlayer_animation_finished"]
+[connection signal="timeout" from="attackTimer" to="." method="_on_attackTimer_timeout"]
