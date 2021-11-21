@@ -92,6 +92,7 @@ func starting_room():
 	inPathways = roomTypesDict.start.inDirections
 	outPathways = roomTypesDict.start.outDirections
 	openDoorLocations.append(direction.East)
+	print ("Starting Room directions: ", openDoorLocations)
 	update_state();
 
 func select_room (roomChosen, isThisMainPath = false):
@@ -119,7 +120,7 @@ func build_room():
 	for i in listOfRoomOpenings.size():
 		if i != 0 : ##Skips the starting room buildout
 			if array_compare_to_check_exact_match(openDoorLocations,listOfRoomOpenings[i]):
-				select_room(roomTypesDict.values()[i])
+				select_room(roomTypesDict.keys()[i])
 				return;
 	print ("Could not find a room in build_room() to match with the types of openings with the set: ", openDoorLocations)
 	
@@ -128,7 +129,7 @@ func listOfRoomOpenings ():
 	var listOfRoomOpenings = []
 	var roomKeys = roomTypesDict.keys()
 	for i in roomTypesDict.size():
-		listOfRoomOpenings.append(roomTypesDict[roomKeys[i]].outDirections)
+		listOfRoomOpenings.append(roomTypesDict[roomKeys[i]].inDirections)
 	return listOfRoomOpenings
 
 func array_compare_to_check_exact_match (array1=[],array2=[]):

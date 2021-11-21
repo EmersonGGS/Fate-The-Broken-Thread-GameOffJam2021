@@ -44,7 +44,8 @@ func select_starting_room(gridDimensions = gridSize):
 			map[randX][randY].starting_room();
 			startPOS = Vector2(randX,randY)
 			emit_signal("set_spawn_point",map[randX][randY].position)
-			foundEmptyRoom = true;
+			foundEmptyRoom = true;		
+			print ("Starting Room Coordinates: ",randX,", ",randY)
 		else: countLoop +=1; if countLoop >= 100:break;
 		
 	print ()
