@@ -20,7 +20,7 @@ onready var W = $"W"
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var roomSize = Vector2 (27,27)
+var roomSize = Vector2 (26,26)
 var tilePixelSize = Vector2(64,64)
 
 onready var roomTypesDict = {

@@ -49,5 +49,6 @@ hframes = 15
 anims/Idle = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( -2, -6 )
 current = true
-zoom = Vector2( 150, 150 )
+zoom = Vector2( 2, 2 )

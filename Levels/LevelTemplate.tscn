@@ -22,6 +22,7 @@ noise = SubResource( 1 )
 script = ExtResource( 3 )
 
 [node name="CloudBacking" type="Sprite" parent="."]
+visible = false
 material = ExtResource( 4 )
 position = Vector2( 4979.45, 3033.48 )
 scale = Vector2( 3.32312, 3.04506 )
@@ -34,6 +35,7 @@ speed = Vector2( 800, 1400 )
 gravity = 4000.0
 
 [node name="StreetLight" type="Sprite" parent="."]
+visible = false
 material = ExtResource( 4 )
 position = Vector2( 788.429, 638.032 )
 scale = Vector2( 2, 2 )
@@ -47,3 +49,5 @@ scale = Vector2( 1, 1.17203 )
 texture = ExtResource( 5 )
 
 [node name="WorldGeneration" parent="." instance=ExtResource( 1 )]
+
+[connection signal="set_spawn_point" from="WorldGeneration" to="Player" method="_on_WorldGeneration_set_spawn_point"]

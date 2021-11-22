@@ -28,9 +28,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 3645.35, 3491.24 )
-current = true
-zoom = Vector2( 10, 10 )
-
 [connection signal="pressed" from="Control/DebugButton" to="." method="_on_DebugButton_pressed"]

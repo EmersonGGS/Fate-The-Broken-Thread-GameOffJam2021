@@ -20,6 +20,7 @@ func _ready():
 	make_grid(gridSize);
 	startPOS = select_starting_room()
 	buildCorePath(startPOS)
+	emit_signal("set_spawn_point",startPOS*roomTile.roomSize*roomTile.tilePixelSize+(Vector2(2,21)*roomTile.tilePixelSize))
 	
 	pass
 

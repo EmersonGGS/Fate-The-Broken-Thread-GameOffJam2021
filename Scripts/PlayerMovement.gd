@@ -32,3 +32,11 @@ func calculate_move_velocity(linear_velocity: Vector2, speed: Vector2, direction
 		calculated_velocity.y = speed.y * direction.y
 #	print(calculated_velocity)
 	return calculated_velocity
+	
+
+
+
+func _on_WorldGeneration_set_spawn_point(spawnPoint):
+	self.position = spawnPoint
+	print (self.position)
+	pass # Replace with function body.
