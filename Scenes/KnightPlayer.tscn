@@ -1,54 +1,70 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/PlayerMovement.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Player/knight_idle_spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://Animations/Player/heavyAttack.tres" type="Animation" id=2]
 [ext_resource path="res://Assets/Player/LanternLightTexture.png" type="Texture" id=3]
 [ext_resource path="res://Materials/LightCanvasMaterial.tres" type="Material" id=4]
+[ext_resource path="res://Animations/Player/falling.tres" type="Animation" id=5]
+[ext_resource path="res://Animations/Player/idle.tres" type="Animation" id=6]
+[ext_resource path="res://Animations/Player/run.tres" type="Animation" id=7]
+[ext_resource path="res://Animations/Player/jumpLand.tres" type="Animation" id=8]
+[ext_resource path="res://Animations/Player/stab.tres" type="Animation" id=9]
+[ext_resource path="res://Animations/Player/jumpUp.tres" type="Animation" id=10]
+[ext_resource path="res://Animations/Player/overhand.tres" type="Animation" id=11]
+[ext_resource path="res://Assets/DSKnight/jump/tile003.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 23.9357, 30.6204 )
+extents = Vector2( 19.5406, 28.8523 )
 
-[sub_resource type="Animation" id=2]
-length = 1.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
-}
+[sub_resource type="RectangleShape2D" id=2]
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( -2.14517, -1.11998 )
-collision_layer = 524289
-collision_mask = 524289
+position = Vector2( -208.587, -467.747 )
 script = ExtResource( 1 )
+speed = Vector2( 800, 1000 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 208.738, 466.891 )
 shape = SubResource( 1 )
 
-[node name="Light2D" type="Light2D" parent="."]
-light_mask = 786433
-material = ExtResource( 4 )
-scale = Vector2( 200, 200 )
-texture = ExtResource( 3 )
-
-[node name="Sprite" type="Sprite" parent="."]
-material = ExtResource( 4 )
-scale = Vector2( 2.21071, 2.21071 )
-texture = ExtResource( 2 )
-hframes = 15
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Idle = SubResource( 2 )
-
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( -2, -6 )
+position = Vector2( 208.738, 466.891 )
 current = true
-zoom = Vector2( 2, 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+material = ExtResource( 4 )
+position = Vector2( 208.738, 469.071 )
+scale = Vector2( 11.3217, 11.3217 )
+texture = ExtResource( 3 )
+range_height = 264.3
+shadow_enabled = true
+shadow_item_cull_mask = 513
+
+[node name="CharacterSprite" type="Sprite" parent="."]
+position = Vector2( 208.738, 455.395 )
+scale = Vector2( 1.25, 1.25 )
+texture = ExtResource( 12 )
+
+[node name="Area2D" type="Area2D" parent="CharacterSprite"]
+position = Vector2( -208.738, -466.891 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterSprite/Area2D"]
+position = Vector2( 242.995, 466.891 )
+shape = SubResource( 2 )
+
+[node name="CharacterSpriteAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/falling = ExtResource( 5 )
+anims/heavyAttack = ExtResource( 2 )
+anims/idle = ExtResource( 6 )
+anims/jumpLand = ExtResource( 8 )
+anims/jumpUp = ExtResource( 10 )
+anims/overhand = ExtResource( 11 )
+anims/run = ExtResource( 7 )
+anims/stab = ExtResource( 9 )
+
+[node name="attackTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="animation_finished" from="CharacterSpriteAnimationPlayer" to="." method="_on_CharacterSpriteAnimationPlayer_animation_finished"]
+[connection signal="timeout" from="attackTimer" to="." method="_on_attackTimer_timeout"]
