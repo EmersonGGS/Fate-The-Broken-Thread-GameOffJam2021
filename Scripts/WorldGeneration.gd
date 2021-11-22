@@ -9,9 +9,9 @@ export (Vector2) var gridSize = Vector2(4,4)
 
 signal set_spawn_point
 
-var roomSize = Vector2(27,27)
+var roomSize = Vector2(26,26)
 var map = []
-var startPOS = Vector2()
+var startPOS = Vector2.ZERO
 enum direction{North,East,South,West}
 
 # Called when the node enters the scene tree for the first time.
@@ -20,7 +20,10 @@ func _ready():
 	make_grid(gridSize);
 	startPOS = select_starting_room()
 	buildCorePath(startPOS)
-	emit_signal("set_spawn_point",startPOS*roomTile.roomSize*roomTile.tilePixelSize+(Vector2(2,21)*roomTile.tilePixelSize))
+	print('startPOS used in calculation:', startPOS)
+	print('room size in pixels:', roomTile.roomSize*roomTile.tilePixelSize)
+	print('startPOS used in calculation:', startPOS*roomTile.roomSize*roomTile.tilePixelSize)
+	emit_signal("set_spawn_point",startPOS*roomTile.roomSize*roomTile.tilePixelSize)
 	
 	pass
 

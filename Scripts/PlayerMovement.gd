@@ -131,5 +131,6 @@ func _on_attackTimer_timeout():
 
 
 func _on_WorldGeneration_set_spawn_point(spawnPoint):
+	print('assigning player position', spawnPoint)
 	self.position = spawnPoint;
 	pass # Replace with function body.
