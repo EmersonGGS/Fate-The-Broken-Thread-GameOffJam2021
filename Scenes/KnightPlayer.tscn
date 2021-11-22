@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Player/knight_idle_spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Player/LanternLightTexture.png" type="Texture" id=3]
+[ext_resource path="res://Materials/LightCanvasMaterial.tres" type="Material" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23.9357, 30.6204 )
@@ -24,32 +25,30 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 228.16, 155.563 )
+position = Vector2( -2.14517, -1.11998 )
+collision_layer = 524289
+collision_mask = 524289
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 208.738, 466.891 )
 shape = SubResource( 1 )
 
+[node name="Light2D" type="Light2D" parent="."]
+light_mask = 786433
+material = ExtResource( 4 )
+scale = Vector2( 200, 200 )
+texture = ExtResource( 3 )
+
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 208.738, 473.391 )
+material = ExtResource( 4 )
 scale = Vector2( 2.21071, 2.21071 )
 texture = ExtResource( 2 )
 hframes = 15
-
-[node name="Light2D" type="Light2D" parent="Sprite"]
-visible = false
-position = Vector2( 2.01164, -3.5639 )
-scale = Vector2( 0.5958, 0.521248 )
-texture = ExtResource( 3 )
-color = Color( 0.815686, 0.819608, 0.0941176, 1 )
-range_height = 264.3
-shadow_enabled = true
-shadow_item_cull_mask = 513
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 208.738, 473.391 )
+position = Vector2( -2, -6 )
 current = true
+zoom = Vector2( 2, 2 )

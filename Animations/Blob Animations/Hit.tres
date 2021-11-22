@@ -1,0 +1,33 @@
+[gd_resource type="Animation" load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Enemies/Blob/Hit/Hit_01.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Enemies/Blob/Hit/Hit_02.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Enemies/Blob/Hit/Hit_03.png" type="Texture" id=3]
+
+[resource]
+resource_name = "Hit"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("EnemySprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionPolygon2D:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ PoolVector2Array( 11.9746, 26.7985, 14.8274, 23.3122, 14.7354, 19.6969, 10.7783, 19.5677, 10.1341, 15.565, 7.64941, 10.9167, 7.46536, 7.81775, 13.6311, 8.33424, 13.355, 6.2683, 11.0544, 2.5238, 8.84575, 0.716116, 2.95608, 0.586994, 2.68, 1.8782, 0.839481, 2.26556, -1.5532, 5.88094, -1.73725, 8.7216, -9.46744, 8.85072, -11.6761, 18.9221, -7.25881, 18.6639, -6.89071, 23.5705, -4.59006, 26.7985 ), PoolVector2Array( 16.76, 27.315, 19.0606, 23.9578, 19.2447, 18.4057, 21.6374, 17.76, 21.1772, 15.3068, 19.1527, 8.7216, 16.0238, 8.59248, 15.8397, 5.75182, 13.447, 2.5238, 11.0544, 0.845236, 5.80889, 0.586994, 3.60026, 2.65293, 0.747452, 5.75182, 1.02353, 7.68863, 2.3119, 9.10896, -0.172808, 15.6941, -0.35686, 17.6309, -2.93359, 18.5348, -2.65751, 22.6666, -0.448884, 27.1859 ), PoolVector2Array( 16.852, 26.6694, 18.6005, 23.5705, 19.2447, 18.4057, 19.2447, 16.8562, 18.3244, 15.3068, 16.668, 11.304, 16.0238, 8.59248, 15.8397, 5.75182, 13.447, 2.5238, 11.0544, 0.845236, 5.80889, 0.586994, 3.60026, 2.65293, 0.747452, 5.75182, 0.379352, 7.43039, -0.0807781, 9.3672, -1.46117, 12.4661, -2.56549, 15.0485, -2.93359, 18.5348, -2.65751, 22.6666, -0.448884, 27.1859 ) ]
+}

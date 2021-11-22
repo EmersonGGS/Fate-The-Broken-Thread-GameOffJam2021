@@ -2,13 +2,14 @@ extends KinematicBody2D
 
 var velocity = Vector2.ZERO;
 
-export var speed = Vector2(300.0, 1000.0)
+export var speed = Vector2(800.0, 1000.0)
 
 export var gravity = 1000.0;
 const JUMPFORCE = -1200;
 
 func _ready():
 	$AnimationPlayer.play("Idle")
+#	Tester.make_border(2)
 
 func _physics_process(delta: float) -> void:
 		var direction = getDirection();
@@ -29,5 +30,13 @@ func calculate_move_velocity(linear_velocity: Vector2, speed: Vector2, direction
 	calculated_velocity.y += gravity * get_physics_process_delta_time()
 	if direction.y == -1.0:
 		calculated_velocity.y = speed.y * direction.y
-	print(calculated_velocity)
+#	print(calculated_velocity)
 	return calculated_velocity
+	
+
+
+
+func _on_WorldGeneration_set_spawn_point(spawnPoint):
+	self.position = spawnPoint
+	print (self.position)
+	pass # Replace with function body.
