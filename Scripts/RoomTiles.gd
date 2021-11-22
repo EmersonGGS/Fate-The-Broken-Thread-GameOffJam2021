@@ -6,11 +6,17 @@ onready var hallway = $Hallway
 onready var NS = $"N&S"
 onready var NES = $"N&E&S"
 onready var NWS = $"N&W&S"
+onready var NEW = $"N&E&W"
+onready var ESW = $"E&S&W"
 onready var WS = $"W&S"
 onready var WN = $"W&N"
 onready var ES = $"E&S"
 onready var EN = $"E&N"
 onready var NESW = $"4Way"
+onready var N = $"N"
+onready var E = $"E"
+onready var S = $"S"
+onready var W = $"W"
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -44,6 +50,16 @@ onready var roomTypesDict = {
 	inDirections =[direction.South,direction.East,direction.North],
 	outDirections = [direction.North,direction.West,direction.South]
 	},
+	NorthEastWest = {
+	object = NEW,
+	inDirections =[direction.South,direction.East,direction.West],
+	outDirections = [direction.North,direction.East,direction.West]
+	},
+	EastSouthWest = {
+	object = ESW,
+	inDirections =[direction.West,direction.North,direction.East],
+	outDirections = [direction.East,direction.South,direction.West]
+	},
 	WestSouth = {
 	object = WS,
 	inDirections =[direction.East,direction.North],
@@ -68,6 +84,26 @@ onready var roomTypesDict = {
 	object = NESW,
 	inDirections =[direction.North,direction.East,direction.South,direction.West],
 	outDirections = [direction.North,direction.East,direction.South,direction.West]
+	},
+	N = {
+	object = N,
+	inDirections =[direction.South],
+	outDirections = [direction.North]
+	},
+	E = {
+	object = E,
+	inDirections =[direction.West],
+	outDirections = [direction.East]
+	},
+	S = {
+	object = S,
+	inDirections =[direction.North],
+	outDirections = [direction.South]
+	},
+	W = {
+	object = W,
+	inDirections =[direction.East],
+	outDirections = [direction.West]
 	},
 }
 
@@ -117,11 +153,15 @@ func open_door (direction):
 
 func build_room():
 	var listOfRoomOpenings = listOfRoomOpenings();
-	for i in listOfRoomOpenings.size():
-		if i != 0 : ##Skips the starting room buildout
-			if array_compare_to_check_exact_match(openDoorLocations,listOfRoomOpenings[i]):
-				select_room(roomTypesDict.keys()[i])
-				return;
+	if roomType != null:
+		update_state();
+		return;
+	elif !openDoorLocations.empty():
+		for i in listOfRoomOpenings.size():
+			if i != 0 : ##Skips the starting room buildout
+				if array_compare_to_check_exact_match(openDoorLocations,listOfRoomOpenings[i]):
+					select_room(roomTypesDict.keys()[i])
+					return;
 	print ("Could not find a room in build_room() to match with the types of openings with the set: ", openDoorLocations)
 	
 	pass
@@ -129,7 +169,7 @@ func listOfRoomOpenings ():
 	var listOfRoomOpenings = []
 	var roomKeys = roomTypesDict.keys()
 	for i in roomTypesDict.size():
-		listOfRoomOpenings.append(roomTypesDict[roomKeys[i]].inDirections)
+		listOfRoomOpenings.append(roomTypesDict[roomKeys[i]].outDirections)
 	return listOfRoomOpenings
 
 func array_compare_to_check_exact_match (array1=[],array2=[]):
