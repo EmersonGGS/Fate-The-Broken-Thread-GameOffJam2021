@@ -73,7 +73,7 @@ position = Vector2( 1097.82, 503.031 )
 texture = SubResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( -224.381, -461.454 )
+position = Vector2( -145.096, -435.025 )
 collision_mask = 8
 gravity = 2000.0
 

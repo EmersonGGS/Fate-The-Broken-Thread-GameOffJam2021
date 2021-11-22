@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Player/heavyAttack.tres" type="Animation" id=2]
@@ -16,9 +16,6 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.5406, 28.8523 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 15.5282, 22.4429 )
-
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( -208.587, -467.747 )
 script = ExtResource( 1 )
@@ -31,7 +28,6 @@ shape = SubResource( 1 )
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 208.738, 466.891 )
 current = true
-zoom = Vector2( 5, 5 )
 
 [node name="Light2D" type="Light2D" parent="."]
 material = ExtResource( 4 )
@@ -46,13 +42,6 @@ shadow_item_cull_mask = 513
 position = Vector2( 208.738, 455.395 )
 scale = Vector2( 1.25, 1.25 )
 texture = ExtResource( 12 )
-
-[node name="Area2D" type="Area2D" parent="CharacterSprite"]
-position = Vector2( -208.738, -466.891 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterSprite/Area2D"]
-position = Vector2( 208.738, 476.088 )
-shape = SubResource( 2 )
 
 [node name="CharacterSpriteAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/falling = ExtResource( 5 )

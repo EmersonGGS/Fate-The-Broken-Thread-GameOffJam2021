@@ -51,6 +51,7 @@ func _physics_process(delta: float) -> void:
 		velocity = move_and_slide(velocity, Vector2.UP)
 		handle_animated_sprite_state()
 
+
 func getDirection() -> Vector2:
 	# Movement direction of player, < 0 is moving right, 0 is stationary, < 0 is moving left
 	var direction = Input.get_action_strength("right") - Input.get_action_strength("left")
@@ -127,10 +128,7 @@ func _on_attackTimer_timeout():
 	$attackTimer.stop();
 	clear_player_state();
 	print('we timed out!');
-	pass # Replace with function body.
-
 
 func _on_WorldGeneration_set_spawn_point(spawnPoint):
-	print('assigning player position', spawnPoint)
-	self.position = spawnPoint;
-	pass # Replace with function body.
+	position = spawnPoint;
+
