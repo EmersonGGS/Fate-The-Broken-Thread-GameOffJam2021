@@ -21,10 +21,10 @@ func _ready():
 	startPOS = select_starting_room()
 	buildCorePath(startPOS)
 	print('room size in pixels:', roomTile.roomSize*roomTile.tilePixelSize)
-	emit_signal("set_spawn_point",startPOS*roomTile.roomSize*roomTile.tilePixelSize)
+	emit_signal("set_spawn_point",startPOS*roomTile.roomSize*roomTile.tilePixelSize+(Vector2(2,21)*roomTile.tilePixelSize))
 	
 	pass
-
+#Make an array of x and y to create the grid, and assign rooms into them
 func make_grid(gridDimensions = gridSize):
 	for i in gridDimensions.x:
 		map.append([]);
@@ -35,6 +35,8 @@ func make_grid(gridDimensions = gridSize):
 			map[i].append(blankLocation);
 	print_grid(map);
 
+#Using the grid, selects a room within the grid thats from 0,0 -> x-1,y, as the
+#starting room is always pointing to the East 
 func select_starting_room(gridDimensions = gridSize):
 	var randX;
 	var randY;
@@ -54,6 +56,7 @@ func select_starting_room(gridDimensions = gridSize):
 	if foundEmptyRoom:return Vector2(randX,randY);
 	else:print ("Couldn't find an empty room")
 
+#build a primary path for level creation. iterative
 func buildCorePath (pointA,gridDimensions = gridSize):
 	var roomCount = round(sqrt(gridDimensions.x*gridDimensions.y))+round(((gridDimensions.x*gridDimensions.y)/3)) #formula to decide how many rooms based on room size
 	var draftOfMap = map.duplicate();
@@ -73,7 +76,6 @@ func buildCorePath (pointA,gridDimensions = gridSize):
 #Passes through rooms starting at the locationInGrid
 #passes through check_surronding_rooms to build a list of directions
 #If room is not set, will roll on each doorway, and if it passes, builds a door in the current room and the corresponding one
-
 func fill_in_empty_map_spaces (locationInGrid,roomsChecked = []):
 	if !roomsChecked.has(locationInGrid):
 		var directionsToCheck = check_surronding_rooms(locationInGrid)
@@ -127,6 +129,7 @@ func check_surronding_rooms (locationInGrid):
 	else: return map[locationInGrid.x][locationInGrid.y].openDoorLocations
 	return possibleDirections
 
+#Comb through the path, and set open Doors for each room
 func set_required_openings (mainPath):
 	for i in mainPath.size():
 		if i != 0:
@@ -186,7 +189,7 @@ func find_path_through_empty_rooms (totalPathCountGoal,currentPosition,chosenRoo
 				continue;
 			else: return pathWayFound
 
-
+#Debug function
 func print_grid(gridToPrint):
 	for i in gridToPrint.size():
 		var string = "("
@@ -196,11 +199,7 @@ func print_grid(gridToPrint):
 		print(string)
 	print ("")
 	print ("")
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+#Debug function
 func _on_DebugButton_pressed():
 	get_tree().reload_current_scene()
 	pass # Replace with function body.

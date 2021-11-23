@@ -1,7 +1,7 @@
 extends Node2D
 
 
-onready var startingRoom = $"Starting Area"
+onready var startingRoom = $"Start"
 onready var hallway = $Hallway
 onready var NS = $"N&S"
 onready var NES = $"N&E&S"
@@ -139,12 +139,14 @@ func select_room (roomChosen, isThisMainPath = false):
 		inPathways = roomTypesDict[roomChosen].inDirections
 		outPathways = roomTypesDict[roomChosen].outDirections
 		update_state();
+		
 	else: print("select_room's roomChosen is not found in dictionary")
 		
 			
 func update_state():
-	$EmptySpace.hide()
 	roomType.show()
+	## DEBUG ROOM
+	delete_unused_rooms_except_for((roomType))
 #	yield(get_tree().create_timer(5.0), "timeout")
 
 func open_door (direction):
@@ -183,6 +185,15 @@ func array_compare_to_check_exact_match (array1=[],array2=[]):
 		else:return false;
 	if array1ToCompare.empty() and array2ToCompare.empty():return true;
 	else:return false;
+	
+func delete_unused_rooms_except_for(nodeToSave):
+	for i in range (self.get_child_count()-1,-1,-1):
+		var nodeToDelete = get_child(i)
+		if nodeToSave != nodeToDelete:
+			nodeToDelete.queue_free()
+			remove_child(nodeToDelete)
+	print (get_children())
+			
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

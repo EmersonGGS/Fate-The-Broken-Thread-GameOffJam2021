@@ -34,6 +34,7 @@ var characterSpriteAnimationPlayer
 var attackTimneout;
 
 func _ready():
+	set_physics_process(true)
 	characterSprite = $CharacterSprite
 	characterSpriteAnimationPlayer = $CharacterSpriteAnimationPlayer
 	characterSpriteAnimationPlayer.play("idle");
@@ -48,8 +49,11 @@ func _physics_process(delta: float) -> void:
 		velocity = calculate_move_velocity(velocity, direction, speed)
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = JUMPFORCE
-		velocity = move_and_slide(velocity, Vector2.UP)
+		velocity = move_and_slide(velocity, Vector2.UP,true,4,.78,false)
 		handle_animated_sprite_state()
+	if Input.is_action_just_pressed("Block"):
+		#debug, teleport character to mouse location
+		self.position = get_global_mouse_position()
 
 
 func getDirection() -> Vector2:
@@ -131,4 +135,11 @@ func _on_attackTimer_timeout():
 
 func _on_WorldGeneration_set_spawn_point(spawnPoint):
 	position = spawnPoint;
+	
 
+
+
+func _on_DebugTimer_timeout():
+	print ("Position: ",self.position)
+	print ("Velocity: ",velocity)
+	pass # Replace with function body.
