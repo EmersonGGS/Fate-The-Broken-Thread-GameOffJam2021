@@ -106,7 +106,13 @@ onready var roomTypesDict = {
 	outDirections = [direction.West]
 	},
 }
-
+onready var enemyTypesDict = {
+	blob = preload("res://Scenes/Blob.tscn")
+}
+onready var objectTypesDict = {
+	smallLights = preload("res://Scenes/SmallLight.tscn")
+	
+}
 
 enum direction{North,East,South,West}
 
@@ -118,6 +124,9 @@ var mainPath = false
 var inPathways = []
 var outPathways = []
 var openDoorLocations = []
+
+##Saving the nodes of active enemies
+var activeEnemies = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -128,7 +137,7 @@ func starting_room():
 	inPathways = roomTypesDict.start.inDirections
 	outPathways = roomTypesDict.start.outDirections
 	openDoorLocations.append(direction.East)
-	print ("Starting Room directions: ", openDoorLocations)
+#	print ("Starting Room directions: ", openDoorLocations)
 	update_state();
 
 func select_room (roomChosen, isThisMainPath = false):
@@ -164,6 +173,7 @@ func build_room():
 				if array_compare_to_check_exact_match(openDoorLocations,listOfRoomOpenings[i]):
 					select_room(roomTypesDict.keys()[i])
 					return;
+
 	print ("Could not find a room in build_room() to match with the types of openings with the set: ", openDoorLocations)
 	
 	pass
@@ -192,8 +202,54 @@ func delete_unused_rooms_except_for(nodeToSave):
 		if nodeToSave != nodeToDelete:
 			nodeToDelete.queue_free()
 			remove_child(nodeToDelete)
-	print (get_children())
+#	print (get_children())
 			
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+			
+func spawn_objects (count,objectType = null):
+	for i in range (0,count,1):
+		var chosenTile = find_open_space();
+		if chosenTile != null:
+			##Just lights for now, no objectType being set/logic
+			var object = objectTypesDict.smallLights.instance()
+			object.position = chosenTile*tilePixelSize
+			add_child(object);
+
+func spawn_enemies (count,enemyType = "Blob"):
+	for i in range (0,count,1):
+		var chosenTile = find_open_space()
+		if chosenTile != null:
+			if enemyType == "Blob":
+				var enemy = enemyTypesDict.blob.instance()
+				enemy.position = chosenTile*tilePixelSize
+				add_child(enemy);
+				activeEnemies.append(enemy)
+	
+func find_open_space ():
+	if roomType != null:
+		var tilesInRoom = roomType.get_used_cells()
+		
+		#clear list of ranges that are known to be a bad range
+		for i in range(tilesInRoom.size()-1,0,-1):
+			if tilesInRoom[i].x <= 0 or tilesInRoom[i].y <= 1 or tilesInRoom[i].y >= roomSize.y:
+				tilesInRoom.remove(i)
+			
+		var foundSpawnPoint = false
+		while !tilesInRoom.empty(): 
+			##Choose a random tile in the set
+			var randomIndex = SeedGenerator.rng.randi_range(0,tilesInRoom.size()-1)
+			var chosenTile = tilesInRoom[randomIndex]
+			##Selecting the space above the tile
+			chosenTile += Vector2(0,-1)
+			if empty_tile_check(chosenTile):
+				return chosenTile;
+			else: tilesInRoom.remove(randomIndex)
+		print("Error - Could not find any available spaces")
+		return null
+	else:print ("Error - Room not set, so object can't be built");return null
+func empty_tile_check(chosenTile):
+	var tileArray = roomType.get_used_cells()
+	for i in tileArray.size():
+		if chosenTile == tileArray[i] or chosenTile+Vector2(0,-1) == tileArray[i]:
+			return false
+	return true
+	

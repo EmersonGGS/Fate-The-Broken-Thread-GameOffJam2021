@@ -13,10 +13,13 @@ var roomSize = Vector2(26,26)
 var map = []
 var startPOS = Vector2.ZERO
 enum direction{North,East,South,West}
-
+var seedNum
 # Called when the node enters the scene tree for the first time.
+
+	
 func _ready():
-	randomize();
+	
+	
 	make_grid(gridSize);
 	startPOS = select_starting_room()
 	buildCorePath(startPOS)
@@ -43,8 +46,8 @@ func select_starting_room(gridDimensions = gridSize):
 	var foundEmptyRoom = false;
 	var countLoop = 0
 	while !foundEmptyRoom:
-		randX = round(rand_range(0,gridDimensions.x-2)); #Starting room is always only open to the East
-		randY = round(rand_range(0,gridDimensions.y-1));
+		randX = SeedGenerator.rng.randi_range(0,gridDimensions.x-2); #Starting room is always only open to the East
+		randY = SeedGenerator.rng.randi_range(0,gridDimensions.y-1);
 		if map[randX][randY].roomType==null:
 			map[randX][randY].starting_room();
 			
@@ -88,7 +91,7 @@ func fill_in_empty_map_spaces (locationInGrid,roomsChecked = []):
 			elif !map[locationInGrid.x][locationInGrid.y].openDoorLocations.has(directionsToCheck[i]):
 #			else:
 				var chanceToChooseRoom = 0.50
-				var rollToChoose = rand_range(0,1)
+				var rollToChoose = SeedGenerator.rng.randf_range(0,1)
 				if rollToChoose <= chanceToChooseRoom:
 					map[locationInGrid.x][locationInGrid.y].open_door(directionsToCheck[i])
 					map[newLocation.x][newLocation.y].open_door(inverse_direction(directionsToCheck[i]))
@@ -112,6 +115,13 @@ func build_all_rooms():
 			print("(",i,",",j,") - ",map[i][j].openDoorLocations)
 			map[i][j].build_room()
 			
+			##Random enemy spawning
+			var randomAmountOfEnemies = SeedGenerator.rng.randi_range(2,8)
+			map[i][j].spawn_enemies(randomAmountOfEnemies)
+			
+			##Random Light Spawning
+			var randomAmountOfLights = SeedGenerator.rng.randi_range(0,2)
+			map[i][j].spawn_objects(randomAmountOfLights)
 ##############################################################################################
 #using a vector in the grid, checks to see if there are options on the cardinal directions:
 #1. if the room is already set (determined by the roomType of each room) then it won't change the room
@@ -171,7 +181,7 @@ func find_path_through_empty_rooms (totalPathCountGoal,currentPosition,chosenRoo
 #	if openSpaces.empty():
 #		openSpaces=map[currentPosition.x][currentPosition.y].openDoorLocations
 	while !openSpaces.empty():
-		var rollDirection = round(rand_range(0,openSpaces.size()-1))
+		var rollDirection = round(SeedGenerator.rng.randf_range(0,openSpaces.size()-1))
 		chosenDirections.append(openSpaces[rollDirection])
 		openSpaces.remove(rollDirection)
 	if chosenDirections.empty():
