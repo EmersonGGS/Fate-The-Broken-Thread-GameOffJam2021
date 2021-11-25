@@ -18,14 +18,20 @@ animation = "Lantern"
 offset = Vector2( 32, 64 )
 
 [node name="CrescentLight" type="Light2D" parent="LightModels"]
+visible = false
 texture = ExtResource( 5 )
+offset = Vector2( 32, 64 )
 
 [node name="CandleLight" type="Light2D" parent="LightModels"]
+visible = false
 texture = ExtResource( 4 )
+offset = Vector2( 32, 64 )
 color = Color( 0.94902, 0.756863, 0, 1 )
 
 [node name="LanternLight" type="Light2D" parent="LightModels"]
+visible = false
 texture = ExtResource( 3 )
+offset = Vector2( 32, 64 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Candle = ExtResource( 8 )

@@ -39,7 +39,7 @@ func enemy_decision ():
 	#Checking for holes first. If there is a hole, we shouldn't care about the next direction
 	if holeInFront and holeInBack:
 		animationPlayer.play("Idle")
-		print ("Idle")
+#		print ("Idle")
 	elif holeInFront:
 		if directionFacing == left:
 			if decision <= movementPercent*2:
@@ -47,7 +47,7 @@ func enemy_decision ():
 		elif directionFacing == right:
 			if decision <= movementPercent*2:
 				move_left();
-		else: animationPlayer.play("Idle"); print ("Idle")
+		else: animationPlayer.play("Idle"); #print ("Idle")
 	elif holeInBack:
 		if directionFacing == left:
 			if decision <= movementPercent*2:
@@ -55,7 +55,7 @@ func enemy_decision ():
 		elif directionFacing == right:
 			if decision <= movementPercent*2:
 				move_left();
-		else: animationPlayer.play("Idle"); print ("Idle")
+		else: animationPlayer.play("Idle"); #print ("Idle")
 		
 	
 	elif playerDetection != null:
@@ -66,10 +66,10 @@ func enemy_decision ():
 	else:
 		if decision <= movementPercent:
 			move_left();
-			print ("Decision Left")
+#			print ("Decision Left")
 		elif decision <= movementPercent*2:
 			move_right(); 
-			print ("Decision Right")
+#			print ("Decision Right")
 			
 
 	
@@ -79,7 +79,7 @@ func move_left():
 		scale.x = -scale.x
 		directionFacing = left
 	animationPlayer.play("Walk")
-	print ("Walk")
+#	print ("Walk")
 	state = left
 	pass
 
@@ -88,7 +88,7 @@ func move_right():
 		scale.x = -scale.x
 		directionFacing = right
 	animationPlayer.play("Walk")
-	print ("Walk")
+#	print ("Walk")
 	state = right
 	pass
 

@@ -1,6 +1,7 @@
 extends Node2D
 var PlayerHealth = 100
 onready var roomTile = preload("res://Scenes/RoomTiles.tscn").instance()
+onready var cloudBacking = $CloudBacking
 export (int) var maxx = 100
 export (int) var maxy = 100
 
@@ -19,7 +20,7 @@ var seedNum
 	
 func _ready():
 	
-	
+	make_cloud_backing()
 	make_grid(gridSize);
 	startPOS = select_starting_room()
 	buildCorePath(startPOS)
@@ -27,6 +28,10 @@ func _ready():
 	emit_signal("set_spawn_point",startPOS*roomTile.roomSize*roomTile.tilePixelSize+(Vector2(2,21)*roomTile.tilePixelSize))
 	
 	pass
+func make_cloud_backing():
+	cloudBacking.texture.width = gridSize.x*roomTile.roomSize.x*roomTile.tilePixelSize.x*2
+	cloudBacking.texture.height = gridSize.y*roomTile.roomSize.y*roomTile.tilePixelSize.y*2
+	cloudBacking.set_position(-roomTile.roomSize*roomTile.tilePixelSize)
 #Make an array of x and y to create the grid, and assign rooms into them
 func make_grid(gridDimensions = gridSize):
 	for i in gridDimensions.x:

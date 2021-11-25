@@ -156,6 +156,8 @@ func update_state():
 	roomType.show()
 	## DEBUG ROOM
 	delete_unused_rooms_except_for((roomType))
+	load_light_Material(roomType)
+	
 #	yield(get_tree().create_timer(5.0), "timeout")
 
 func open_door (direction):
@@ -202,8 +204,12 @@ func delete_unused_rooms_except_for(nodeToSave):
 		if nodeToSave != nodeToDelete:
 			nodeToDelete.queue_free()
 			remove_child(nodeToDelete)
-#	print (get_children())
-			
+	var names = []
+	for i in get_children().size():
+		names.append(get_child(i).get_name())
+	print (get_name())
+	print (name)
+
 			
 func spawn_objects (count,objectType = null):
 	for i in range (0,count,1):
@@ -253,3 +259,5 @@ func empty_tile_check(chosenTile):
 			return false
 	return true
 	
+func load_light_Material(room):
+	room.material = load("res://Materials/LightCanvasMaterial.tres")
