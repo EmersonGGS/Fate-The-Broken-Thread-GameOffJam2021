@@ -5,7 +5,7 @@ var velocity = Vector2.ZERO;
 export var speed = Vector2(500.0, 500.0)
 
 export var gravity = 1.0;
-const JUMPFORCE = -850;
+const JUMPFORCE = -950;
 
 # Player attack options
 const attackAnimations = [
