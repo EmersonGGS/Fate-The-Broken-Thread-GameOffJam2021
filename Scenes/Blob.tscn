@@ -62,19 +62,20 @@ collide_with_areas = true
 position = Vector2( -16.5178, 26.1381 )
 enabled = true
 cast_to = Vector2( 200, 0 )
-collision_mask = 524288
+collision_mask = 2
 
 [node name="PlayerInBackRay" type="RayCast2D" parent="RayChecks"]
 position = Vector2( -16.5178, 26.1381 )
 enabled = true
 cast_to = Vector2( -100, 0 )
-collision_mask = 524288
+collision_mask = 2
 
 [node name="PlayerDetector" type="Area2D" parent="."]
-collision_layer = 524288
+collision_layer = 0
 collision_mask = 524288
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+light_mask = 2
 position = Vector2( 24.4691, -4.16601 )
 shape = SubResource( 1 )
 
@@ -82,8 +83,8 @@ shape = SubResource( 1 )
 visible = false
 position = Vector2( 21.9231, -0.76923 )
 monitoring = false
-collision_layer = 524289
-collision_mask = 524289
+collision_layer = 524290
+collision_mask = 786434
 
 [node name="AttackWave" type="AnimatedSprite" parent="AttackDetector"]
 frames = SubResource( 2 )

@@ -154,6 +154,7 @@ func select_room (roomChosen, isThisMainPath = false):
 			
 func update_state():
 	roomType.show()
+
 	## DEBUG ROOM
 	delete_unused_rooms_except_for((roomType))
 	load_light_Material(roomType)

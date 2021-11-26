@@ -10,6 +10,7 @@
 script = ExtResource( 3 )
 
 [node name="CloudBacking" type="TextureRect" parent="."]
+visible = false
 material = ExtResource( 5 )
 margin_right = 512.0
 margin_bottom = 512.0

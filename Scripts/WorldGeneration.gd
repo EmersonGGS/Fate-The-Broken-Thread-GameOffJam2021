@@ -20,7 +20,7 @@ var seedNum
 	
 func _ready():
 	
-	make_cloud_backing()
+#	make_cloud_backing()
 	make_grid(gridSize);
 	startPOS = select_starting_room()
 	buildCorePath(startPOS)
@@ -51,6 +51,7 @@ func select_starting_room(gridDimensions = gridSize):
 	var foundEmptyRoom = false;
 	var countLoop = 0
 	while !foundEmptyRoom:
+		rand_range(0,1)
 		randX = SeedGenerator.rng.randi_range(0,gridDimensions.x-2); #Starting room is always only open to the East
 		randY = SeedGenerator.rng.randi_range(0,gridDimensions.y-1);
 		if map[randX][randY].roomType==null:
