@@ -16,7 +16,7 @@ var velocity = Vector2.ZERO;
 
 export var enemyScale = 1.3
 
-export var speed = Vector2(150.0, 10.0)
+export var speed = Vector2(200.0, 50.0)
 export var gravity = 1000.0;
 
 
@@ -147,13 +147,16 @@ func hole_in_back():
 	return false
 
 	
-	
 func locate_player():
 	if playerInFrontRay.is_colliding():
 		if directionFacing == left: return left; else: return right
 	elif playerInBackRay.is_colliding():
 		if directionFacing == left: return right; else: return left
 	return null;
+
+func recieve_damage():
+	# function called from player or other damage causing nodes when detection is called
+	animationPlayer.play("Death");
 
 func _on_MovementTimer_timeout():
 	
@@ -175,20 +178,13 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	else:
 		print("insert function to track death into more global counter")
 		queue_free();
-		
-	pass # Replace with function body.
 
 
 func _on_PlayerDetector_body_entered(body):
 	if body.name == "Player" and animationPlayer.current_animation != "Attack":
 		attack();
-	pass # Replace with function body.
-		
-	pass # Replace with function body.
 
 
 func _on_AttackDetector_body_entered(body):
 	if body.name == "Player":
 		print ("Placeholder for Damage")
-		##
-	pass # Replace with function body.

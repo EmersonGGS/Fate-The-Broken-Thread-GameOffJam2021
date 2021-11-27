@@ -76,7 +76,7 @@ func calculate_move_velocity(linear_velocity: Vector2, speed: Vector2, direction
 	return calculated_velocity
 
 func handle_attack() -> void:
-	print(playerAttackIndex)
+#	print(playerAttackIndex)
 	#	Player is starting to attack
 	if !playerAttackInProgress or $attackTimer.time_left > 0:
 		$attackTimer.stop()
@@ -115,14 +115,14 @@ func handle_animated_sprite_state() -> void:
 
 
 func _on_CharacterSpriteAnimationPlayer_animation_finished(anim_name):
-	print(anim_name)
+#	print(anim_name)
 	var isAnimationAnAttack = attackAnimations.find(anim_name, 0);
 	if isAnimationAnAttack >= 0:
-		print('Starting attack combo timer...')
+#		print('Starting attack combo timer...')
 		$attackTimer.start()
 
 func clear_player_state():
-	print('clearing player state')
+#	print('clearing player state')
 	playerAttackInProgress = false;
 	playerState = playerStates.IDLE;
 	playerAttackIndex = 0;
@@ -131,7 +131,7 @@ func clear_player_state():
 func _on_attackTimer_timeout():
 	$attackTimer.stop();
 	clear_player_state();
-	print('we timed out!');
+#	print('we timed out!');
 
 func _on_WorldGeneration_set_spawn_point(spawnPoint):
 	position = spawnPoint;
@@ -140,6 +140,15 @@ func _on_WorldGeneration_set_spawn_point(spawnPoint):
 
 
 func _on_DebugTimer_timeout():
-	print ("Position: ",self.position)
-	print ("Velocity: ",velocity)
+#	print ("Position: ",self.position)
+#	print ("Velocity: ",velocity)
 	pass # Replace with function body.
+
+func _on_AttackArea_area_entered(area):
+	var areaName = area.get_name();
+	if (areaName == "PlayerDetector"):
+		var enemyBeingAttacked = area.get_parent();
+		if(enemyBeingAttacked != null):
+			# Cause damage to the intersecting area
+			enemyBeingAttacked.recieve_damage();
+
