@@ -7,7 +7,7 @@
 [ext_resource path="res://Animations/Player/StartingGame.tres" type="Animation" id=6]
 [ext_resource path="res://Fonts/normalText.tres" type="DynamicFont" id=7]
 [ext_resource path="res://Fonts/BoldText.tres" type="DynamicFont" id=8]
-[ext_resource path="res://Assets/DSKnight/idle/tile003.png" type="Texture" id=10]
+[ext_resource path="res://Assets/DSKnight/idle/tile004.png" type="Texture" id=38]
 [ext_resource path="res://Scripts/StartMenu.gd" type="Script" id=40]
 [ext_resource path="res://Assets/Player/LanternLightTexture.png" type="Texture" id=41]
 [ext_resource path="res://Assets/tilemap/Wasteland Tileset/WastelandGround.png" type="Texture" id=42]
@@ -110,7 +110,30 @@ margin_top = 64.0
 margin_right = 86.0
 margin_bottom = 81.0
 custom_fonts/font = ExtResource( 8 )
+shortcut_in_tooltip = false
 text = "About"
+
+[node name="AboutScrollBar" type="ScrollContainer" parent="."]
+margin_left = 580.0
+margin_top = 197.0
+margin_right = 1012.0
+margin_bottom = 584.0
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AboutText" type="RichTextLabel" parent="AboutScrollBar"]
+visible = false
+margin_right = 432.0
+margin_bottom = 387.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 7 )
+text = "Testing 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MovingBackground" type="Node2D" parent="."]
 position = Vector2( -197, 602 )
@@ -131,7 +154,7 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 material = ExtResource( 43 )
 position = Vector2( 32.701, -14.7797 )
 scale = Vector2( 0.463432, 0.463432 )
-texture = ExtResource( 10 )
+texture = ExtResource( 38 )
 
 [node name="PlayerAnimation" type="AnimationPlayer" parent="MovingBackground"]
 method_call_mode = 1

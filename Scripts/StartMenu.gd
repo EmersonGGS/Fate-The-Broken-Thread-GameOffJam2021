@@ -2,6 +2,11 @@ extends Node2D
 
 onready var playerSelection = $Menu/PlayerSelection
 onready var buttonsSelection = $Menu/Buttons
+onready var menu = $Menu
+onready var aboutText = $AboutScrollBar/AboutText
+onready var aboutScrollContainer = $AboutScrollBar
+onready var aboutScrollBar = $AboutScrollBar.get_v_scrollbar()
+
 var menuCurrentChoice = 0;
 var menuSelected = true
 var optionSelected = false
@@ -30,16 +35,35 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_up"):
 		if menuSelected:
 			changeSelection(-1)
+		elif aboutSelected:
+			pass
 	elif Input.is_action_just_pressed("ui_down"):
 		if menuSelected:
 			changeSelection(1)
+		elif aboutSelected:
+			pass
 	elif Input.is_action_just_pressed("ui_accept"):
 		if menuSelected:
 			buttonsSelection.get_child(menuCurrentChoice).emit_signal("pressed")
+			
+		elif aboutSelected:
+			back_to_menu();
 
-func ready():
+func _ready():
+	load_ReadMe()
 	pass
 
+func _draw():
+	
+	pass
+	
+func load_ReadMe ():
+	var README = File.new()
+	README.open("res://README", File.READ)
+	var text = ""
+	while !README.eof_reached():
+		text += str(README.get_line()) + "\n"
+	aboutText.text = text
 
 func _on_Play_pressed():
 	emit_signal("playPressed")
@@ -47,12 +71,35 @@ func _on_Play_pressed():
 
 
 func _on_Options_pressed():
+	
 	pass # Replace with function body.
 
 
 func _on_About_pressed():
+	menu.hide()
+	aboutText.show()
+	update_selection(2)
 	pass # Replace with function body.
 
+func back_to_menu ():
+	update_selection (0);
+	menu.show()
+#	optionMenu.hide()
+	aboutText.hide()
+	
+func update_selection (choice):
+	if choice == 0:
+		menuSelected = true
+		optionSelected = false
+		aboutSelected = false
+	elif choice == 1:
+		menuSelected = false
+		optionSelected = true
+		aboutSelected = false
+	elif choice == 2:
+		menuSelected = false
+		optionSelected = false
+		aboutSelected = true
 
 func _on_BumperAnimation_animation_finished(anim_name):
 	if anim_name == "StartingGame":
