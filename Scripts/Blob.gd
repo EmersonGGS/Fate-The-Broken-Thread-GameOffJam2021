@@ -9,68 +9,70 @@ onready var backFloorCheck = $RayChecks/BackFloorCheckRay
 onready var playerInFrontRay = $RayChecks/PlayerInFrontRay
 onready var playerInBackRay = $RayChecks/PlayerInBackRay
 onready var animationPlayer = $AnimationPlayer
-
-
+onready var audioStreamPlayer = $AudioStreamPlayer2D
 
 var velocity = Vector2.ZERO;
 
-export var enemyScale = 1.3
+export var enemyScale = 1.3;
 
-export var speed = Vector2(200.0, 50.0)
+export var speed = Vector2(200.0, 50.0);
 export var gravity = 1000.0;
 
 
-enum {still,left,right, attack}
-onready var state = still
+enum {still,left,right, attack};
+onready var state = still;
 
-onready var directionFacing = right
-var holeInFront = false
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var directionFacing = right;
+onready var isDead = false;
+var holeInFront = false;
+
+# Sounds
+var monsterDiesSound = preload("../Assets/Audio/monster_dies.wav");
 
 func enemy_decision ():
-	#place holder for logic - 40% to move, 20% to attack
-	var movementPercent = 4;
-	var decision = round(rand_range(0,8));
-	var holeInFront = hole_in_front();
-	var holeInBack = hole_in_back();
-	var playerDetection = locate_player()
-	#Checking for holes first. If there is a hole, we shouldn't care about the next direction
-	if holeInFront and holeInBack:
-		animationPlayer.play("Idle")
-#		print ("Idle")
-	elif holeInFront:
-		if directionFacing == left:
-			if decision <= movementPercent*2:
-				move_right();
-		elif directionFacing == right:
-			if decision <= movementPercent*2:
-				move_left();
-		else: animationPlayer.play("Idle"); #print ("Idle")
-	elif holeInBack:
-		if directionFacing == left:
-			if decision <= movementPercent*2:
-				move_right();
-		elif directionFacing == right:
-			if decision <= movementPercent*2:
-				move_left();
-		else: animationPlayer.play("Idle"); #print ("Idle")
+	if (!isDead):
+		#place holder for logic - 40% to move, 20% to attack
+		var movementPercent = 4;
+		var decision = round(rand_range(0,8));
+		var holeInFront = hole_in_front();
+		var holeInBack = hole_in_back();
+		var playerDetection = locate_player()
 		
-	
-	elif playerDetection != null:
-		if playerDetection == left:
-			move_left();
-		elif playerDetection == right:
-			move_right(); 
-	else:
-		if decision <= movementPercent:
-			move_left();
-#			print ("Decision Left")
-		elif decision <= movementPercent*2:
-			move_right(); 
-#			print ("Decision Right")
+		#Checking for holes first. If there is a hole, we shouldn't care about the next direction
+		if holeInFront and holeInBack:
+			animationPlayer.play("Idle")
+	#		print ("Idle")
+		elif holeInFront:
+			if directionFacing == left:
+				if decision <= movementPercent*2:
+					move_right();
+			elif directionFacing == right:
+				if decision <= movementPercent*2:
+					move_left();
+			else: animationPlayer.play("Idle"); #print ("Idle")
+		elif holeInBack:
+			if directionFacing == left:
+				if decision <= movementPercent*2:
+					move_right();
+			elif directionFacing == right:
+				if decision <= movementPercent*2:
+					move_left();
+			else: animationPlayer.play("Idle"); #print ("Idle")
 			
+		
+		elif playerDetection != null:
+			if playerDetection == left:
+				move_left();
+			elif playerDetection == right:
+				move_right(); 
+		else:
+			if decision <= movementPercent:
+				move_left();
+	#			print ("Decision Left")
+			elif decision <= movementPercent*2:
+				move_right(); 
+	#			print ("Decision Right")
+				
 
 	
 
@@ -156,7 +158,29 @@ func locate_player():
 
 func recieve_damage():
 	# function called from player or other damage causing nodes when detection is called
+	destroy();
+
+
+func destroy():
+	
+	isDead = true;
+	
+#	Stop animations in progress
+	animationPlayer.stop();
+	
+#	If idleTime is running, kill it
+	if(idleTime):
+		idleTime.stop();
+		
+#	If moveTimer is running, kill it
+	if(moveTimer):
+		moveTimer.stop();
+		
+#	Animate the death
 	animationPlayer.play("Death");
+	
+	audioStreamPlayer.stream = monsterDiesSound;
+	audioStreamPlayer.play();
 
 func _on_MovementTimer_timeout():
 	

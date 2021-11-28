@@ -1,10 +1,10 @@
 extends KinematicBody2D
 
-var velocity = Vector2.ZERO;
-
+# Exports
 export var speed = Vector2(500.0, 500.0)
-
 export var gravity = 1.0;
+
+# Constants
 const JUMPFORCE = -950;
 
 # Player attack options
@@ -20,6 +20,9 @@ const playerStates = {
 	"ATTACKING": "ATTACKING"
 };
 
+# Variables
+var velocity = Vector2.ZERO;
+
 # Current player state
 var playerState = playerStates.IDLE
 
@@ -28,13 +31,18 @@ var playerAttackIndex = 0;
 var playerAttackInProgress = false;
 
 # Sprite/animation variables
-var characterSprite
-var characterSpriteAnimationPlayer
+var characterSprite;
+var characterSpriteAnimationPlayer;
+var audioStreamPlayer;
+
+# Sounds
+var attackImpactSound = preload("../Assets/Audio/attack_impact.wav");
 
 var attackTimneout;
 
 func _ready():
 	set_physics_process(true)
+	audioStreamPlayer = $AudioStreamPlayer2D
 	characterSprite = $CharacterSprite
 	characterSpriteAnimationPlayer = $CharacterSpriteAnimationPlayer
 	characterSpriteAnimationPlayer.play("idle");
@@ -127,6 +135,12 @@ func clear_player_state():
 	playerState = playerStates.IDLE;
 	playerAttackIndex = 0;
 
+func dealDamageToEnemy(body):
+	if (body.has_method("recieve_damage") && !body.isDead):
+		body.recieve_damage();
+		audioStreamPlayer.stream = attackImpactSound;
+		audioStreamPlayer.play();
+
 
 func _on_attackTimer_timeout():
 	$attackTimer.stop();
@@ -137,18 +151,9 @@ func _on_WorldGeneration_set_spawn_point(spawnPoint):
 	position = spawnPoint;
 	
 
-
-
-func _on_DebugTimer_timeout():
-#	print ("Position: ",self.position)
-#	print ("Velocity: ",velocity)
-	pass # Replace with function body.
+func _on_AttackArea_body_entered(body):
+	dealDamageToEnemy(body);
 
 func _on_AttackArea_area_entered(area):
-	var areaName = area.get_name();
-	if (areaName == "PlayerDetector"):
-		var enemyBeingAttacked = area.get_parent();
-		if(enemyBeingAttacked != null):
-			# Cause damage to the intersecting area
-			enemyBeingAttacked.recieve_damage();
-
+	if (area.name == "HitBox"):
+		dealDamageToEnemy(area.get_parent());
