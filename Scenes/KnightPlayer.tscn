@@ -11,14 +11,14 @@
 [ext_resource path="res://Animations/Player/stab.tres" type="Animation" id=9]
 [ext_resource path="res://Animations/Player/jumpUp.tres" type="Animation" id=10]
 [ext_resource path="res://Animations/Player/overhand.tres" type="Animation" id=11]
-[ext_resource path="res://Assets/DSKnight/stab/tile009.png" type="Texture" id=12]
+[ext_resource path="res://Assets/DSKnight/overhand/tile009.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Audio/background_music.wav" type="AudioStream" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20.43, 31.4979 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 19.9784, 35.2437 )
+extents = Vector2( 48.7558, 32.3333 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -62,10 +62,10 @@ wait_time = 0.2
 one_shot = true
 
 [node name="AttackArea" type="Area2D" parent="."]
-position = Vector2( 40.54, 0 )
+position = Vector2( 35, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2( -38.7562, 7.13524 )
+position = Vector2( -60.7562, 7.13524 )
 shape = SubResource( 2 )
 disabled = true
 

@@ -12,6 +12,7 @@ onready var animationPlayer = $AnimationPlayer
 onready var audioStreamPlayer = $AudioStreamPlayer2D
 
 var velocity = Vector2.ZERO;
+var health = 100;
 
 export var enemyScale = 1.3;
 
@@ -157,8 +158,10 @@ func locate_player():
 	return null;
 
 func recieve_damage():
+	health -=1;
+	print(health)
 	# function called from player or other damage causing nodes when detection is called
-	destroy();
+#	destroy();
 
 
 func destroy():

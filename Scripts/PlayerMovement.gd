@@ -152,7 +152,8 @@ func _on_WorldGeneration_set_spawn_point(spawnPoint):
 	
 
 func _on_AttackArea_body_entered(body):
-	dealDamageToEnemy(body);
+	pass
+#	dealDamageToEnemy(body);
 
 func _on_AttackArea_area_entered(area):
 	if (area.name == "HitBox"):
