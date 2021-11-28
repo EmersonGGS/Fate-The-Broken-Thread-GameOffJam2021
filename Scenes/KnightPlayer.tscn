@@ -11,7 +11,7 @@
 [ext_resource path="res://Animations/Player/stab.tres" type="Animation" id=9]
 [ext_resource path="res://Animations/Player/jumpUp.tres" type="Animation" id=10]
 [ext_resource path="res://Animations/Player/overhand.tres" type="Animation" id=11]
-[ext_resource path="res://Assets/DSKnight/overhand/tile009.png" type="Texture" id=12]
+[ext_resource path="res://Assets/DSKnight/stab/tile009.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Audio/background_music.wav" type="AudioStream" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -62,10 +62,10 @@ wait_time = 0.2
 one_shot = true
 
 [node name="AttackArea" type="Area2D" parent="."]
-position = Vector2( 35, 0 )
+position = Vector2( 40.54, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2( -33.2162, 7.13524 )
+position = Vector2( -38.7562, 7.13524 )
 shape = SubResource( 2 )
 disabled = true
 
