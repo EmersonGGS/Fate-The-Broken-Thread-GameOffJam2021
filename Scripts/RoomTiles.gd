@@ -1,6 +1,6 @@
 extends Node2D
 
-
+onready var keyObject = preload("res://Scenes/Key.tscn")
 onready var startingRoom = $"Start"
 onready var hallway = $Hallway
 onready var NS = $"N&S"
@@ -213,6 +213,8 @@ func delete_unused_rooms_except_for(nodeToSave):
 
 			
 func spawn_objects (count,objectType = null):
+	if mainPath and objectType == null:
+		count = 20;
 	for i in range (0,count,1):
 		var chosenTile = find_open_space();
 		if chosenTile != null:
@@ -220,7 +222,16 @@ func spawn_objects (count,objectType = null):
 			var object = objectTypesDict.smallLights.instance()
 			object.position = chosenTile*tilePixelSize
 			add_child(object);
+		elif chosenTile == "Key":
+			var key = keyObject.instance()
+			key.position = chosenTile*tilePixelSize
+			add_child(key)
+			
+			
 
+func spawn_key():
+	spawn_objects(1,"Key")
+	
 func spawn_enemies (count,enemyType = "Blob"):
 	for i in range (0,count,1):
 		var chosenTile = find_open_space()

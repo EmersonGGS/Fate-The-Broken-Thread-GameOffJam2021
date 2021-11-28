@@ -18,6 +18,7 @@ config/icon="res://icon.png"
 
 SeedGenerator="*res://Scripts/SeedGenerator.gd"
 CharacterState="*res://Scripts/CharacterState.gd"
+GlobalSound="*res://Scripts/GlobalSound.gd"
 
 [display]
 
