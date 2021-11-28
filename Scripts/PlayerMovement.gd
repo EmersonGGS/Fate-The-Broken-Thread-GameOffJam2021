@@ -137,7 +137,11 @@ func clear_player_state():
 
 func dealDamageToEnemy(body):
 	if (body.has_method("recieve_damage") && !body.isDead):
-		body.recieve_damage();
+		var rng = RandomNumberGenerator.new()
+		rng.randomize();
+		var num = rng.randi_range(4, 12)
+		var crit = num > 9;
+		body.recieve_damage(num, crit);
 		audioStreamPlayer.stream = attackImpactSound;
 		audioStreamPlayer.play();
 

@@ -12,7 +12,7 @@ onready var animationPlayer = $AnimationPlayer
 onready var audioStreamPlayer = $AudioStreamPlayer2D
 
 var velocity = Vector2.ZERO;
-var health = 100;
+var health = 42;
 
 export var enemyScale = 1.3;
 
@@ -157,12 +157,13 @@ func locate_player():
 		if directionFacing == left: return right; else: return left
 	return null;
 
-func recieve_damage():
-	health -=1;
-	print(health)
+func recieve_damage(damage, crit):
+	health -= damage;
+	$FCTMgr.show_value(damage, crit);
+	
 	# function called from player or other damage causing nodes when detection is called
-#	destroy();
-
+	if (health <= 0):
+		destroy();
 
 func destroy():
 	

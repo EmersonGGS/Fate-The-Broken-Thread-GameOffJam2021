@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/Blob.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Enemies/Blob/Attack_Wave.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Animations/Blob Animations/Hit.tres" type="Animation" id=6]
 [ext_resource path="res://Animations/Blob Animations/Attack.tres" type="Animation" id=7]
 [ext_resource path="res://Assets/Enemies/Blob/Walk/Walk_01.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/FCTMgr.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/FCTMgr.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 44.0852, 22.3524 )
@@ -112,6 +114,11 @@ anims/Idle = ExtResource( 5 )
 anims/Walk = ExtResource( 4 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="FCTMgr" parent="." instance=ExtResource( 9 )]
+position = Vector2( 0.128601, -22.0874 )
+script = ExtResource( 10 )
+duration = 1
 
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_DecisionTimer_timeout"]
 [connection signal="timeout" from="MovementTimer" to="." method="_on_MovementTimer_timeout"]
