@@ -9,7 +9,6 @@ func randSeedNum():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	rng = RandomNumberGenerator.new()
 	rng.seed = hash(randSeedNum())
 	print ("Seed Key State = ",rng.state)

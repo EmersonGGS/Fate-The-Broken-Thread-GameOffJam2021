@@ -25,6 +25,8 @@ onready var state = still
 
 onready var directionFacing = right
 var holeInFront = false
+
+var damage = 2
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -189,6 +191,6 @@ func _on_PlayerDetector_body_entered(body):
 
 func _on_AttackDetector_body_entered(body):
 	if body.name == "Player":
-		print ("Placeholder for Damage")
+		CharacterState.player_damage(damage)
 		##
 	pass # Replace with function body.

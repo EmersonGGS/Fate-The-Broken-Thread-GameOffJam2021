@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var keyObject = preload("res://Scenes/Key.tscn")
+onready var doorObject = preload("res://Scenes/Door.tscn")
 
 onready var startingRoom = $"Start"
 onready var hallway = $Hallway
@@ -154,8 +156,9 @@ func select_room (roomChosen, isThisMainPath = false):
 			
 func update_state():
 	roomType.show()
+
 	## DEBUG ROOM
-	delete_unused_rooms_except_for((roomType))
+	delete_unused_rooms_except_for(roomType)
 	load_light_Material(roomType)
 	
 #	yield(get_tree().create_timer(5.0), "timeout")
@@ -212,14 +215,30 @@ func delete_unused_rooms_except_for(nodeToSave):
 
 			
 func spawn_objects (count,objectType = null):
+#	if mainPath and objectType == null:
+#		count = 20;
 	for i in range (0,count,1):
 		var chosenTile = find_open_space();
 		if chosenTile != null:
-			##Just lights for now, no objectType being set/logic
-			var object = objectTypesDict.smallLights.instance()
-			object.position = chosenTile*tilePixelSize
-			add_child(object);
+			if objectType == "SmallLight":
+				##Just lights for now, no objectType being set/logic
+				var object = objectTypesDict.smallLights.instance()
+				object.position = chosenTile*tilePixelSize
+				add_child(object);
+			elif objectType == "Key":
+				var key = keyObject.instance()
+				key.position = chosenTile*tilePixelSize
+				add_child(key)
+			elif objectType == "Door":
+				var key = doorObject.instance()
+				key.position = chosenTile*tilePixelSize
+				add_child(key)
+				
+			
 
+func spawn_key():
+	spawn_objects(1,"Key")
+	
 func spawn_enemies (count,enemyType = "Blob"):
 	for i in range (0,count,1):
 		var chosenTile = find_open_space()

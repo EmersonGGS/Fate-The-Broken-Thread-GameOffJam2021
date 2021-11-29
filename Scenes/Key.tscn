@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Materials/LightCanvasMaterial.tres" type="Material" id=1]
+[ext_resource path="res://Assets/Objects/SmallLightObjects/CandleLight.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Objects/Objectives/Key.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "KeyFloating"
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.75, 1 ),
+"transitions": PoolRealArray( 0.732043, 1.1487, 0.870551, 1.36604 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -5 ), Vector2( 0, 5 ), Vector2( 0, 0 ) ]
+}
+
+[node name="Key" type="Node2D"]
+position = Vector2( 0, 0.364749 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 1 )
+rotation = -1.5708
+scale = Vector2( 3, 3 )
+texture = ExtResource( 3 )
+
+[node name="Light2D" type="Light2D" parent="Sprite"]
+scale = Vector2( 2.0713, 2.0713 )
+texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.5
+anims/KeyFloating = SubResource( 1 )

@@ -17,6 +17,8 @@ config/icon="res://icon.png"
 [autoload]
 
 SeedGenerator="*res://Scripts/SeedGenerator.gd"
+CharacterState="*res://Scripts/CharacterState.gd"
+GlobalSound="*res://Scripts/GlobalSound.gd"
 
 [display]
 
@@ -59,6 +61,14 @@ Block={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Physical World"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="PlayerAttack"
+2d_physics/layer_19="EnemyAttack"
+2d_physics/layer_20="Enemy"
 
 [physics]
 

@@ -143,3 +143,12 @@ func _on_DebugTimer_timeout():
 	print ("Position: ",self.position)
 	print ("Velocity: ",velocity)
 	pass # Replace with function body.
+
+
+func _on_Player_input_event(viewport, event, shape_idx):
+	pass # Replace with function body.
+
+
+func _on_HurtBox_body_entered(body):
+	print ("Oh God!")
+	pass # Replace with function body.

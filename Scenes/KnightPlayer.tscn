@@ -11,7 +11,11 @@
 [ext_resource path="res://Animations/Player/stab.tres" type="Animation" id=9]
 [ext_resource path="res://Animations/Player/jumpUp.tres" type="Animation" id=10]
 [ext_resource path="res://Animations/Player/overhand.tres" type="Animation" id=11]
+<<<<<<< HEAD
 [ext_resource path="res://Assets/DSKnight/stab/tile009.png" type="Texture" id=12]
+=======
+[ext_resource path="res://Assets/DSKnight/run/tile000.png" type="Texture" id=12]
+>>>>>>> Player_UI
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.5406, 28.8523 )
