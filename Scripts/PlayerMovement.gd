@@ -1,10 +1,10 @@
 extends KinematicBody2D
 
-var velocity = Vector2.ZERO;
-
+# Exports
 export var speed = Vector2(500.0, 500.0)
-
 export var gravity = 1.0;
+
+# Constants
 const JUMPFORCE = -950;
 
 # Player attack options
@@ -20,6 +20,9 @@ const playerStates = {
 	"ATTACKING": "ATTACKING"
 };
 
+# Variables
+var velocity = Vector2.ZERO;
+
 # Current player state
 var playerState = playerStates.IDLE
 
@@ -28,13 +31,18 @@ var playerAttackIndex = 0;
 var playerAttackInProgress = false;
 
 # Sprite/animation variables
-var characterSprite
-var characterSpriteAnimationPlayer
+var characterSprite;
+var characterSpriteAnimationPlayer;
+var audioStreamPlayer;
+
+# Sounds
+var attackImpactSound = preload("../Assets/Audio/attack_impact.wav");
 
 var attackTimneout;
 
 func _ready():
 	set_physics_process(true)
+	audioStreamPlayer = $AudioStreamPlayer2D
 	characterSprite = $CharacterSprite
 	characterSpriteAnimationPlayer = $CharacterSpriteAnimationPlayer
 	characterSpriteAnimationPlayer.play("idle");
@@ -76,7 +84,7 @@ func calculate_move_velocity(linear_velocity: Vector2, speed: Vector2, direction
 	return calculated_velocity
 
 func handle_attack() -> void:
-	print(playerAttackIndex)
+#	print(playerAttackIndex)
 	#	Player is starting to attack
 	if !playerAttackInProgress or $attackTimer.time_left > 0:
 		$attackTimer.stop()
@@ -115,40 +123,42 @@ func handle_animated_sprite_state() -> void:
 
 
 func _on_CharacterSpriteAnimationPlayer_animation_finished(anim_name):
-	print(anim_name)
+#	print(anim_name)
 	var isAnimationAnAttack = attackAnimations.find(anim_name, 0);
 	if isAnimationAnAttack >= 0:
-		print('Starting attack combo timer...')
+#		print('Starting attack combo timer...')
 		$attackTimer.start()
 
 func clear_player_state():
-	print('clearing player state')
+#	print('clearing player state')
 	playerAttackInProgress = false;
 	playerState = playerStates.IDLE;
 	playerAttackIndex = 0;
+
+func dealDamageToEnemy(body):
+	if (body.has_method("recieve_damage") && !body.isDead):
+		var rng = RandomNumberGenerator.new()
+		rng.randomize();
+		var num = rng.randi_range(4, 12)
+		var crit = num > 9;
+		body.recieve_damage(num, crit);
+		audioStreamPlayer.stream = attackImpactSound;
+		audioStreamPlayer.play();
 
 
 func _on_attackTimer_timeout():
 	$attackTimer.stop();
 	clear_player_state();
-	print('we timed out!');
+#	print('we timed out!');
 
 func _on_WorldGeneration_set_spawn_point(spawnPoint):
 	position = spawnPoint;
 	
 
+func _on_AttackArea_body_entered(body):
+	pass
+#	dealDamageToEnemy(body);
 
-
-func _on_DebugTimer_timeout():
-	print ("Position: ",self.position)
-	print ("Velocity: ",velocity)
-	pass # Replace with function body.
-
-
-func _on_Player_input_event(viewport, event, shape_idx):
-	pass # Replace with function body.
-
-
-func _on_HurtBox_body_entered(body):
-	print ("Oh God!")
-	pass # Replace with function body.
+func _on_AttackArea_area_entered(area):
+	if (area.name == "HitBox"):
+		dealDamageToEnemy(area.get_parent());
