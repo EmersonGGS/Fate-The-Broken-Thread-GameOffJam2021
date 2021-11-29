@@ -1,6 +1,7 @@
 extends Node2D
 var PlayerHealth = 100
 onready var roomTile = preload("res://Scenes/RoomTiles.tscn").instance()
+onready var musicPlayer = $BGMusicPlayer
 onready var cloudBacking = $CloudBacking
 export (int) var maxx = 100
 export (int) var maxy = 100
@@ -20,7 +21,7 @@ var seedNum
 	
 func _ready():
 	
-	make_cloud_backing()
+#	make_cloud_backing()
 	make_grid(gridSize);
 	startPOS = select_starting_room()
 	buildCorePath(startPOS)
@@ -51,6 +52,7 @@ func select_starting_room(gridDimensions = gridSize):
 	var foundEmptyRoom = false;
 	var countLoop = 0
 	while !foundEmptyRoom:
+		rand_range(0,1)
 		randX = SeedGenerator.rng.randi_range(0,gridDimensions.x-2); #Starting room is always only open to the East
 		randY = SeedGenerator.rng.randi_range(0,gridDimensions.y-1);
 		if map[randX][randY].roomType==null:
@@ -79,6 +81,7 @@ func buildCorePath (pointA,gridDimensions = gridSize):
 	set_required_openings (mainPath)
 	fill_in_empty_map_spaces (pointA);
 	build_all_rooms()
+	core_item_spawn (mainPath)
 
 #Iterative Process
 #Passes through rooms starting at the locationInGrid
@@ -126,7 +129,19 @@ func build_all_rooms():
 			
 			##Random Light Spawning
 			var randomAmountOfLights = SeedGenerator.rng.randi_range(0,2)
-			map[i][j].spawn_objects(randomAmountOfLights)
+			map[i][j].spawn_objects(randomAmountOfLights, "SmallLight")
+
+func core_item_spawn (path):
+	var key_location = SeedGenerator.rng.randi_range(1,path.size()-1)
+	var door_location = SeedGenerator.rng.randi_range(1,path.size()-1)
+	if path.size() > 2:
+		while door_location == key_location:
+			door_location = SeedGenerator.rng.randi_range(1,path.size()-1)
+	print("Key is in Room:",key_location," || Door is in Room:",door_location)
+	map[path[key_location].x][path[key_location].x].spawn_objects(1,"Key")
+	map[path[door_location].x][path[door_location].x].spawn_objects(1,"Door")
+	for i in path.size()-1:
+		map[path[i].x][path[i].y].spawn_objects(20,"SmallLight")
 ##############################################################################################
 #using a vector in the grid, checks to see if there are options on the cardinal directions:
 #1. if the room is already set (determined by the roomType of each room) then it won't change the room
@@ -217,4 +232,10 @@ func print_grid(gridToPrint):
 #Debug function
 func _on_DebugButton_pressed():
 	get_tree().reload_current_scene()
+	pass # Replace with function body.
+
+
+func _on_BGMusicPlayer_finished():
+	musicPlayer.stream = load("res://Audio/World_1_Seamless.wav")
+	musicPlayer.play(0.0)
 	pass # Replace with function body.
