@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Materials/LightCanvasMaterial.tres" type="Material" id=1]
 [ext_resource path="res://Assets/Objects/SmallLightObjects/CandleLight.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Objects/Objectives/Key.png" type="Texture" id=3]
 
-[sub_resource type="Animation" id=1]
-resource_name = "KeyFloating"
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 17.75
+
+[sub_resource type="Animation" id=2]
 loop = true
 step = 0.05
 tracks/0/type = "value"
@@ -34,6 +36,14 @@ texture = ExtResource( 3 )
 scale = Vector2( 2.0713, 2.0713 )
 texture = ExtResource( 2 )
 
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
+rotation = 1.5708
+scale = Vector2( 0.333333, 0.333333 )
+shape = SubResource( 1 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 0.5
-anims/KeyFloating = SubResource( 1 )
+anims/KeyFloating = SubResource( 2 )
