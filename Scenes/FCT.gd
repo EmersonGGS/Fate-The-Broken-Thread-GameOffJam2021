@@ -3,7 +3,6 @@ extends Label
 
 func show_value(value, travel, duration, spread, crit=false):
 	text = value
-	print(text)
 	# For scaling, set the pivot offset to the center.
 	rect_pivot_offset = rect_size / 2
 	var movement = travel.rotated(rand_range(-spread/2, spread/2))
@@ -21,5 +20,4 @@ func show_value(value, travel, duration, spread, crit=false):
 			0.4, Tween.TRANS_BACK, Tween.EASE_IN)
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
-	print("Tween complete")
 	queue_free()
