@@ -48,16 +48,6 @@ one_shot = true
 [node name="RayChecks" type="Node2D" parent="."]
 position = Vector2( 16.6464, -19.3515 )
 
-[node name="FrontFloorCheckRay" type="RayCast2D" parent="RayChecks"]
-position = Vector2( 92.9068, 0.407486 )
-enabled = true
-collide_with_areas = true
-
-[node name="BackFloorCheckRay" type="RayCast2D" parent="RayChecks"]
-position = Vector2( -123.876, 2.44491 )
-enabled = true
-collide_with_areas = true
-
 [node name="PlayerInFrontRay" type="RayCast2D" parent="RayChecks"]
 position = Vector2( -16.5178, 26.1381 )
 enabled = true
