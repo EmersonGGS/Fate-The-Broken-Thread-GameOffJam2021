@@ -6,7 +6,7 @@ onready var bumperAnimation = $BumperAnimation
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+signal startNewGame
 var nextTile = Vector2(11,0)
 
 var gridPos
@@ -48,4 +48,14 @@ func _on_PlayerAnimation_animation_started(anim_name):
 	if anim_name == "idle":
 		groundMoving = false
 		groundTween.stop_all()
+	pass # Replace with function body.
+
+
+func _on_BumperAnimation_animation_finished(anim_name):
+	
+	if anim_name == "StartingGame":
+		bumperAnimation.playback_speed = .45
+		bumperAnimation.play("StartingGameText")
+	elif anim_name == "StartingGameText":
+		emit_signal("startNewGame")
 	pass # Replace with function body.

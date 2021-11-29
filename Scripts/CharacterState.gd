@@ -5,7 +5,11 @@ var maxHealth = 100
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+var keyLocation = Vector2()
+var doorLocation = Vector2()
 
+var foundKey = false
+var foundDoor = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

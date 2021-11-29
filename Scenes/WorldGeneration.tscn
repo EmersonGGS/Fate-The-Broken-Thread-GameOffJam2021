@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/RoomTiles.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Player/LanternLightTexture.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/WorldGeneration.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Background/cloudBacking.tres" type="Texture" id=4]
 [ext_resource path="res://Materials/LightCanvasMaterial.tres" type="Material" id=5]
+[ext_resource path="res://Audio/World_1_Seamless.wav" type="AudioStream" id=6]
 
 [node name="WorldGeneration" type="Node2D"]
 script = ExtResource( 3 )
@@ -47,4 +48,9 @@ position = Vector2( 3797.12, 3277.98 )
 current = true
 zoom = Vector2( 10, 10 )
 
+[node name="BGMusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
+
 [connection signal="pressed" from="Control/DebugButton" to="." method="_on_DebugButton_pressed"]
+[connection signal="finished" from="BGMusicPlayer" to="." method="_on_BGMusicPlayer_finished"]

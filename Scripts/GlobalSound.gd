@@ -5,6 +5,8 @@ var musicPlaying = true
 var soundVolume = .75
 var musicVolume = .75
 
+#var musicPlayer = AudioStreamPlayer2D.new()
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -16,9 +18,15 @@ func _ready():
 
 
 func update_sound (soundStateNow = soundPlaying,soundVolumeNow = soundVolume):
+	soundPlaying = soundStateNow;
+	soundVolume = soundVolumeNow;
+	update_audio_bus_configurations()
 	pass
 	
 func update_music(musicStateNow = musicPlaying,musicVolumeNow = musicVolume):
+	musicPlaying = musicStateNow
+	musicVolume = musicVolumeNow
+	update_audio_bus_configurations()
 	pass
 
 func update_all_music_and_sound():
@@ -35,9 +43,9 @@ func _on_SoundVolume_value_changed(value):
 	pass # Replace with function body.
 
 func update_audio_bus_configurations():
-	AudioServer.set_bus_mute(AudioServer.get_bus_index("SoundEffect"),soundPlaying);
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("SoundEffect"),!soundPlaying);
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SoundEffect"),linear2db(soundVolume));
-	AudioServer.set_bus_mute(AudioServer.get_bus_index("BackgroundMusic"),musicPlaying);
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("BackgroundMusic"),!musicPlaying);
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("BackgroundMusic"),linear2db(musicVolume));
 	print("Sound: ", soundPlaying, "/", soundVolume, " || Music: ",musicPlaying, "/", musicVolume)
 
