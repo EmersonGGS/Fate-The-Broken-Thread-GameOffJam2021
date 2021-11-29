@@ -6,8 +6,15 @@ export var travel = Vector2(0, -80)
 export var duration = 2
 export var spread = PI/2
 
-func show_value(value, crit=false):
-	var fct = FCT.instance()
+func show_value(value, crit=false, shouldScale=false):
+	var fct = FCT.instance();
+	print(shouldScale)
+	print(scale)
+	if (shouldScale):
+		scale.x = -1
+	else:
+		scale.x = 1
+		
 	add_child(fct);
-	print(value)
+	print(scale)
 	fct.show_value(str(value), travel, duration, spread, crit)

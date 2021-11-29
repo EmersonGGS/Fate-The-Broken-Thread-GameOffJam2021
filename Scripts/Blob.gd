@@ -159,7 +159,7 @@ func locate_player():
 
 func recieve_damage(damage, crit):
 	health -= damage;
-	$FCTMgr.show_value(damage, crit);
+	$FCTMgr.show_value(damage, crit, directionFacing == left);
 	# function called from player or other damage causing nodes when detection is called
 	if (health <= 0):
 		destroy();
