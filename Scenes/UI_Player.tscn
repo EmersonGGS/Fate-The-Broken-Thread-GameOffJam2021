@@ -38,3 +38,5 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="UI_HealthBar"]
+playback_speed = 0.2
+playback/speed = 0.2

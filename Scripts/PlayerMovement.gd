@@ -144,7 +144,15 @@ func dealDamageToEnemy(body):
 		body.recieve_damage(num, crit);
 		audioStreamPlayer.stream = attackImpactSound;
 		audioStreamPlayer.play();
-
+		
+		
+func recieve_damage(damage, crit):
+	CharacterState.health -= damage;
+	$UI_Player.UI_health_update(CharacterState.health)
+#	$FCTMgr.show_value(damage, crit, directionFacing == left);
+	# function called from player or other damage causing nodes when detection is called
+	if (CharacterState.health <= 0):
+		print(' Oh no... ')
 
 func _on_attackTimer_timeout():
 	$attackTimer.stop();
