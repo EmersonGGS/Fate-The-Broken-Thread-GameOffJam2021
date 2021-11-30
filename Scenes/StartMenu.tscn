@@ -9,7 +9,7 @@
 [ext_resource path="res://Fonts/normalText.tres" type="DynamicFont" id=7]
 [ext_resource path="res://Fonts/BoldText.tres" type="DynamicFont" id=8]
 [ext_resource path="res://Assets/UI/Slider.png" type="Texture" id=9]
-[ext_resource path="res://Assets/DSKnight/idle/tile007.png" type="Texture" id=10]
+[ext_resource path="res://Assets/DSKnight/idle/tile000.png" type="Texture" id=10]
 [ext_resource path="res://Animations/Player/StartingGameText.tres" type="Animation" id=11]
 [ext_resource path="res://Audio/SFX/Boulder_Incoming.wav" type="AudioStream" id=12]
 [ext_resource path="res://Assets/UI/BlackoutScreen.jpg" type="Texture" id=13]
@@ -43,13 +43,13 @@ __meta__ = {
 }
 
 [node name="GameTitle" type="Label" parent="."]
-margin_left = 537.251
+margin_left = 240.0
 margin_top = 110.769
-margin_right = 692.253
+margin_right = 509.0
 margin_bottom = 127.769
 rect_scale = Vector2( 3, 3 )
 custom_fonts/font = ExtResource( 8 )
-text = "Untitled Game"
+text = "Fate: The Broken Thread"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -71,7 +71,61 @@ margin_bottom = 387.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = ExtResource( 7 )
-text = "Testing 1"
+text = "Assets Used:
+https://hugues-laborde.itch.io/
+
+Dear Man - https://hugues-laborde.itch.io/pack-character-pixel-art-05
+Knight Villain - https://hugues-laborde.itch.io/pack-character-pixel-art-04
+Blob Enemy - https://hugues-laborde.itch.io/pack-character-pixel-art-07
+
+
+
+Physical Items:
+https://opengameart.org/users/matepore
+Street Lamp - https://opengameart.org/content/lamp-post
+
+https://nyknck.itch.io
+stones - https://nyknck.itch.io/stone
+
+https://admurin.itch.io/
+Steampunk Lamps - https://admurin.itch.io/steampunk-lamps
+
+https://kronbits.itch.io
+key - https://kronbits.itch.io/matriax-free-assets
+
+https://opengameart.org/users/rubberduck
+door - https://opengameart.org/content/pixel-art-castle-tileset
+
+TileMaps:
+https://quintino-pixels.itch.io
+Wasteland - https://quintino-pixels.itch.io/wasteland-plataformer-tileset
+
+
+Fonts:
+https://www.fontsquirrel.com/fonts/list/foundry/jason-kottke
+SilkScreen: https://www.fontsquirrel.com/fonts/Silkscreen
+
+Music:
+Humble Big Royalty-Free Music Bundle
+Dark Fantasy Studio
+Knight Boss:
+Archives Vol. 3: The Joke - 29-You are fighting with me
+World 1 Boss:
+Chaos logic chaos the butterfly effect - Dystopia (seamless)
+Menu Boss:
+Black Sails - 8-A last prayer (seamless)
+
+SFX:
+
+TomWinandySFX Explosions Volume I
+Boulder Incoming  - Incoming 14.wav
+Boulder Impact  - Incoming 14.wav
+
+RPG SFX Bundle
+Door Opening - Door 1
+Key Pickup - Jar 4 Open
+
+"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -301,7 +355,6 @@ stream = ExtResource( 12 )
 bus = "SoundEffect"
 
 [node name="StartingText" type="Control" parent="."]
-visible = false
 margin_left = -512.0
 margin_top = -269.0
 margin_right = -472.0
@@ -311,7 +364,7 @@ __meta__ = {
 }
 
 [node name="Blackout" type="TextureRect" parent="StartingText"]
-visible = false
+modulate = Color( 1, 1, 1, 0 )
 margin_top = 40.0
 margin_right = 2250.0
 margin_bottom = 1004.0
@@ -327,7 +380,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText1" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.0316072 )
+modulate = Color( 1, 1, 1, 0.0290021 )
 margin_left = 636.526
 margin_top = 319.268
 margin_right = 1672.53
@@ -339,7 +392,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText2" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.00040102 )
+modulate = Color( 1, 1, 1, 0.0289993 )
 margin_left = 762.973
 margin_top = 418.802
 margin_right = 1798.97
@@ -351,7 +404,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText3" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.0245256 )
+modulate = Color( 1, 1, 1, 0.0289965 )
 margin_left = 574.824
 margin_top = 526.418
 margin_right = 1610.82
@@ -363,7 +416,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText4" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.0245504 )
+modulate = Color( 1, 1, 1, 0.0290213 )
 margin_left = 871.0
 margin_top = 543.418
 margin_right = 1055.0
@@ -376,7 +429,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText5" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.0245905 )
+modulate = Color( 1, 1, 1, 0.0290613 )
 margin_left = 1049.25
 margin_top = 574.905
 margin_right = 1233.25
@@ -389,7 +442,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText6" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.0246305 )
+modulate = Color( 1, 1, 1, 0.0291014 )
 margin_left = 1233.25
 margin_top = 543.418
 margin_right = 1498.25
@@ -402,7 +455,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText7" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.0245876 )
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 698.824
 margin_top = 626.418
 margin_right = 1422.82
@@ -414,7 +467,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText8" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.0245419 )
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 674.875
 margin_top = 722.418
 margin_right = 1398.87
@@ -426,7 +479,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText9" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.0244961 )
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 1233.0
 margin_top = 819.0
 margin_right = 1957.0
@@ -438,7 +491,7 @@ __meta__ = {
 }
 
 [node name="Blackout2" type="TextureRect" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.0244179 )
+modulate = Color( 1, 1, 1, 0 )
 margin_top = 40.0
 margin_right = 2250.0
 margin_bottom = 1004.0
@@ -454,7 +507,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText10" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.0121784 )
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

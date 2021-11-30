@@ -54,7 +54,7 @@ func _on_PlayerAnimation_animation_started(anim_name):
 func _on_BumperAnimation_animation_finished(anim_name):
 	
 	if anim_name == "StartingGame":
-		bumperAnimation.playback_speed = .45
+		bumperAnimation.playback_speed = .55
 		bumperAnimation.play("StartingGameText")
 	elif anim_name == "StartingGameText":
 		emit_signal("startNewGame")

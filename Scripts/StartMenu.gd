@@ -102,7 +102,7 @@ func _physics_process(delta):
 			skip_confirmation();
 
 func _ready():
-	load_ReadMe()
+#	load_ReadMe()
 	play_menu_music()
 	set_volumes()
 	pass
