@@ -22,7 +22,7 @@ func _ready():
 
 func _on_BGMusicPlayer_finished():
 	if !fightDone:
-		bgMusicPlayer.stream = load("res://Audio/Boss_Battle_1_Main.wav")
+		bgMusicPlayer.stream = load("res://Audio/Boss_Battle_1_Main.mp3")
 		bgMusicPlayer.play(0.0)
 		
 	
@@ -30,7 +30,7 @@ func _on_BGMusicPlayer_finished():
 
 
 func _on_Enemy_BossDefeated():
-	bgMusicPlayer.stream = load("res://Audio/Boss_Battle_1_Ending.wav")
+	bgMusicPlayer.stream = load("res://Audio/Boss_Battle_1_Ending.mp3")
 	bgMusicPlayer.play(0.0)
 	fightDone = true
 	pass # Replace with function body.

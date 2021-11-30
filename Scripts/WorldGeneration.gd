@@ -236,6 +236,6 @@ func _on_DebugButton_pressed():
 
 
 func _on_BGMusicPlayer_finished():
-	musicPlayer.stream = load("res://Audio/World_1_Seamless.wav")
+	musicPlayer.stream = load("res://Audio/World_1_Seamless.mp3")
 	musicPlayer.play(0.0)
 	pass # Replace with function body.

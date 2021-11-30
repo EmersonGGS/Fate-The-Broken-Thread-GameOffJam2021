@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Boss_Battle_1_Ending.mp3-e24166908d0e33b4c7146d74321f42a5.mp3str"
+
+[deps]
+
+source_file="res://Audio/Boss_Battle_1_Ending.mp3"
+dest_files=[ "res://.import/Boss_Battle_1_Ending.mp3-e24166908d0e33b4c7146d74321f42a5.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

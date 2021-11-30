@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/KnightPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/KnightBoss.tscn" type="PackedScene" id=2]
@@ -8,7 +8,9 @@
 [ext_resource path="res://Fonts/BoldText.tres" type="DynamicFont" id=6]
 [ext_resource path="res://Assets/UI/BlackoutScreen.jpg" type="Texture" id=7]
 [ext_resource path="res://Fonts/normalText.tres" type="DynamicFont" id=8]
-[ext_resource path="res://Audio/Boss_Battle_1_Intro.wav" type="AudioStream" id=9]
+[ext_resource path="res://Audio/Boss_Battle_1_Intro.mp3" type="AudioStream" id=9]
+[ext_resource path="res://Materials/LightCanvasMaterial.tres" type="Material" id=10]
+[ext_resource path="res://Scenes/Fog.tscn" type="PackedScene" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.87451, 0.0941176, 0.0941176, 1 )
@@ -77,9 +79,17 @@ tracks/3/keys = {
 [node name="Boss Room" type="Node2D"]
 script = ExtResource( 4 )
 
+[node name="Fog" parent="." instance=ExtResource( 11 )]
+material = ExtResource( 10 )
+margin_left = -108.814
+margin_top = 288.505
+margin_right = -108.814
+margin_bottom = 288.505
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 591.699, 774.906 )
 collision_layer = 17411
+fogOnViewer = false
 
 [node name="Level" type="TileMap" parent="."]
 scale = Vector2( 4, 4 )

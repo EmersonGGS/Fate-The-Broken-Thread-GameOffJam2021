@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/World_1_Seamless.mp3-f0ea02d696e2154e5bcf5ebdadb0eb08.mp3str"
+
+[deps]
+
+source_file="res://Audio/World_1_Seamless.mp3"
+dest_files=[ "res://.import/World_1_Seamless.mp3-f0ea02d696e2154e5bcf5ebdadb0eb08.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
