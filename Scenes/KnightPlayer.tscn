@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Player/heavyAttack.tres" type="Animation" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Animations/Player/overhand.tres" type="Animation" id=11]
 [ext_resource path="res://Assets/DSKnight/overhand/tile009.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Audio/background_music.wav" type="AudioStream" id=13]
+[ext_resource path="res://Scenes/UI_Player.tscn" type="PackedScene" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20.43, 31.4979 )
@@ -75,6 +76,12 @@ volume_db = -25.0
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 13 )
 autoplay = true
+
+[node name="UI_Player" parent="." instance=ExtResource( 14 )]
+margin_left = -536.915
+margin_top = -348.988
+margin_right = 540.085
+margin_bottom = 366.012
 
 [connection signal="animation_finished" from="CharacterSpriteAnimationPlayer" to="." method="_on_CharacterSpriteAnimationPlayer_animation_finished"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attackTimer_timeout"]

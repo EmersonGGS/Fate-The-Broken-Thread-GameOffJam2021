@@ -9,5 +9,6 @@
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 collision_mask = 8
+speed = Vector2( 500, 700 )
 
 [connection signal="set_spawn_point" from="WorldGeneration" to="Player" method="_on_WorldGeneration_set_spawn_point"]
