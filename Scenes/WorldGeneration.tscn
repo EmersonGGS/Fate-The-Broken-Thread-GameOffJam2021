@@ -42,12 +42,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Camera2D" type="Camera2D" parent="."]
-visible = false
-position = Vector2( 3797.12, 3277.98 )
-current = true
-zoom = Vector2( 10, 10 )
-
 [node name="BGMusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
 autoplay = true

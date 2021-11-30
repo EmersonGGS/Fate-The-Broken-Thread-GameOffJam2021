@@ -355,6 +355,7 @@ stream = ExtResource( 12 )
 bus = "SoundEffect"
 
 [node name="StartingText" type="Control" parent="."]
+visible = false
 margin_left = -512.0
 margin_top = -269.0
 margin_right = -472.0
@@ -364,6 +365,7 @@ __meta__ = {
 }
 
 [node name="Blackout" type="TextureRect" parent="StartingText"]
+visible = false
 modulate = Color( 1, 1, 1, 0 )
 margin_top = 40.0
 margin_right = 2250.0

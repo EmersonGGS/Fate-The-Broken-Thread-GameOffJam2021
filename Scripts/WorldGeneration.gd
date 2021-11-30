@@ -122,14 +122,14 @@ func build_all_rooms():
 		for j in map[i].size():
 			print("(",i,",",j,") - ",map[i][j].openDoorLocations)
 			map[i][j].build_room()
-			
-			##Random enemy spawning
-			var randomAmountOfEnemies = SeedGenerator.rng.randi_range(2,8)
-			map[i][j].spawn_enemies(randomAmountOfEnemies)
-			
-			##Random Light Spawning
-			var randomAmountOfLights = SeedGenerator.rng.randi_range(0,2)
-			map[i][j].spawn_objects(randomAmountOfLights, "SmallLight")
+			if startPOS != Vector2(i,j):
+				##Random enemy spawning
+				var randomAmountOfEnemies = SeedGenerator.rng.randi_range(2,8)
+				map[i][j].spawn_enemies(randomAmountOfEnemies)
+				
+				##Random Light Spawning
+				var randomAmountOfLights = SeedGenerator.rng.randi_range(0,2)
+				map[i][j].spawn_objects(randomAmountOfLights, "SmallLight")
 
 func core_item_spawn (path):
 	var key_location = SeedGenerator.rng.randi_range(1,path.size()-1)
