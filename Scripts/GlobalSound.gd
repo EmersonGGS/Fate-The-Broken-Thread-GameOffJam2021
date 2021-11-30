@@ -2,7 +2,7 @@ extends Node
 
 var soundPlaying = true
 var musicPlaying = true
-var soundVolume = .75
+var soundVolume = .55
 var musicVolume = .75
 
 #var musicPlayer = AudioStreamPlayer2D.new()
