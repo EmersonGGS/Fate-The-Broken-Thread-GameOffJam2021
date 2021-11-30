@@ -106,7 +106,18 @@ func _ready():
 	randomize()
 	animationPlayer.play("Idle")
 	
-
+func find_player_is_close_enough ():
+	var playerNode = get_parent().get_parent().get_parent().find_node("Player")
+	var current = self
+	var difference = current.position -playerNode.position
+	if difference.x < 0:
+		difference.x = -difference.x
+	if difference.y < 0 :
+		difference.y = -difference.y
+	if difference.x > 1080 or difference.y>900:
+		return false
+	else: return true
+	
 func _physics_process(delta):
 	velocity.y += delta * gravity
 	if is_on_floor():
@@ -128,7 +139,8 @@ func _physics_process(delta):
 
 
 func _on_DecisionTimer_timeout():
-	enemy_decision()
+	if find_player_is_close_enough ():
+		enemy_decision()
 	pass # Replace with function body.
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Player/heavyAttack.tres" type="Animation" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Animations/Player/overhand.tres" type="Animation" id=11]
 [ext_resource path="res://Assets/DSKnight/overhand/tile005.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Audio/background_music.wav" type="AudioStream" id=13]
+[ext_resource path="res://Scenes/Fog.tscn" type="PackedScene" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20.43, 31.4979 )
@@ -29,6 +30,12 @@ gravity = 2000.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1.78381, 7.13524 )
 shape = SubResource( 1 )
+
+[node name="Fog" parent="." instance=ExtResource( 14 )]
+visible = false
+material = ExtResource( 4 )
+margin_left = -549.954
+margin_right = -549.954
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 1.78381, 7.13524 )

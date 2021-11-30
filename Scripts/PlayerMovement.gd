@@ -3,7 +3,7 @@ extends KinematicBody2D
 # Exports
 export var speed = Vector2(500.0, 500.0)
 export var gravity = 1.0;
-
+export var fogOnViewer = true
 # Constants
 const JUMPFORCE = -950;
 
@@ -41,6 +41,8 @@ var attackImpactSound = preload("../Assets/Audio/attack_impact.wav");
 var attackTimneout;
 
 func _ready():
+	if fogOnViewer:
+		$Fog.show()
 	set_physics_process(true)
 	audioStreamPlayer = $AudioStreamPlayer2D
 	characterSprite = $CharacterSprite

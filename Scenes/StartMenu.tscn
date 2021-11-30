@@ -9,7 +9,7 @@
 [ext_resource path="res://Fonts/normalText.tres" type="DynamicFont" id=7]
 [ext_resource path="res://Fonts/BoldText.tres" type="DynamicFont" id=8]
 [ext_resource path="res://Assets/UI/Slider.png" type="Texture" id=9]
-[ext_resource path="res://Assets/DSKnight/idle/tile000.png" type="Texture" id=10]
+[ext_resource path="res://Assets/DSKnight/idle/tile002.png" type="Texture" id=10]
 [ext_resource path="res://Animations/Player/StartingGameText.tres" type="Animation" id=11]
 [ext_resource path="res://Audio/SFX/Boulder_Incoming.wav" type="AudioStream" id=12]
 [ext_resource path="res://Assets/UI/BlackoutScreen.jpg" type="Texture" id=13]
@@ -366,7 +366,7 @@ __meta__ = {
 
 [node name="Blackout" type="TextureRect" parent="StartingText"]
 visible = false
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.0147216 )
 margin_top = 40.0
 margin_right = 2250.0
 margin_bottom = 1004.0
@@ -382,7 +382,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText1" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.0290021 )
+modulate = Color( 1, 1, 1, 0.0121729 )
 margin_left = 636.526
 margin_top = 319.268
 margin_right = 1672.53
@@ -394,7 +394,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText2" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.0289993 )
+modulate = Color( 1, 1, 1, 0.014348 )
 margin_left = 762.973
 margin_top = 418.802
 margin_right = 1798.97
@@ -406,7 +406,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText3" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.0289965 )
+modulate = Color( 1, 1, 1, 0.0142446 )
 margin_left = 574.824
 margin_top = 526.418
 margin_right = 1610.82
@@ -418,7 +418,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText4" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.0290213 )
+modulate = Color( 1, 1, 1, 0.015379 )
 margin_left = 871.0
 margin_top = 543.418
 margin_right = 1055.0
@@ -431,7 +431,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText5" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.0290613 )
+modulate = Color( 1, 1, 1, 0.0124922 )
 margin_left = 1049.25
 margin_top = 574.905
 margin_right = 1233.25
@@ -444,7 +444,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText6" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0.0291014 )
+modulate = Color( 1, 1, 1, 0.0125322 )
 margin_left = 1233.25
 margin_top = 543.418
 margin_right = 1498.25
@@ -457,7 +457,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText7" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.0124893 )
 margin_left = 698.824
 margin_top = 626.418
 margin_right = 1422.82
@@ -469,7 +469,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText8" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.0124435 )
 margin_left = 674.875
 margin_top = 722.418
 margin_right = 1398.87
@@ -481,7 +481,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText9" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.0161228 )
 margin_left = 1233.0
 margin_top = 819.0
 margin_right = 1957.0
@@ -493,7 +493,7 @@ __meta__ = {
 }
 
 [node name="Blackout2" type="TextureRect" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.0147533 )
 margin_top = 40.0
 margin_right = 2250.0
 margin_bottom = 1004.0
@@ -509,7 +509,7 @@ __meta__ = {
 }
 
 [node name="OnboardingText10" type="Label" parent="StartingText"]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.0140266 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
