@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Player/heavyAttack.tres" type="Animation" id=2]
@@ -11,9 +11,10 @@
 [ext_resource path="res://Animations/Player/stab.tres" type="Animation" id=9]
 [ext_resource path="res://Animations/Player/jumpUp.tres" type="Animation" id=10]
 [ext_resource path="res://Animations/Player/overhand.tres" type="Animation" id=11]
-[ext_resource path="res://Assets/DSKnight/overhand/tile009.png" type="Texture" id=12]
+[ext_resource path="res://Animations/Player/death.tres" type="Animation" id=12]
 [ext_resource path="res://Assets/Audio/background_music.wav" type="AudioStream" id=13]
 [ext_resource path="res://Scenes/UI_Player.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/DSKnight/death/tile003.png" type="Texture" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20.43, 31.4979 )
@@ -46,9 +47,10 @@ shadow_item_cull_mask = 513
 [node name="CharacterSprite" type="Sprite" parent="."]
 position = Vector2( 0, -7.84782 )
 scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 12 )
+texture = ExtResource( 18 )
 
 [node name="CharacterSpriteAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/death = ExtResource( 12 )
 anims/falling = ExtResource( 5 )
 anims/heavyAttack = ExtResource( 2 )
 anims/idle = ExtResource( 6 )

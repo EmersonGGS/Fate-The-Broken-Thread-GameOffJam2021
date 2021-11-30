@@ -37,6 +37,7 @@ var audioStreamPlayer;
 
 # Sounds
 var attackImpactSound = preload("../Assets/Audio/attack_impact.wav");
+var deathSound = preload("../Assets/Audio/player_dies.wav");
 
 var attackTimneout;
 
@@ -152,6 +153,11 @@ func recieve_damage(damage, crit):
 #	$FCTMgr.show_value(damage, crit, directionFacing == left);
 	# function called from player or other damage causing nodes when detection is called
 	if (CharacterState.health <= 0):
+		set_physics_process(false)
+		audioStreamPlayer.volume_db = 0.0
+		audioStreamPlayer.stream = deathSound;
+		audioStreamPlayer.play();
+		characterSpriteAnimationPlayer.play("death");
 		print(' Oh no... ')
 
 func _on_attackTimer_timeout():

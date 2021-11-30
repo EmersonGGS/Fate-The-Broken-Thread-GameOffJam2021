@@ -18,7 +18,7 @@ __meta__ = {
 margin_left = 23.6577
 margin_top = 638.573
 margin_right = 373.658
-margin_bottom = 688.573
+margin_bottom = 673.573
 texture = ExtResource( 3 )
 expand = true
 __meta__ = {
@@ -26,10 +26,10 @@ __meta__ = {
 }
 
 [node name="UI_HealthBar" type="TextureRect" parent="."]
-margin_left = 29.0
+margin_left = 30.0
 margin_top = 644.0
 margin_right = 368.0
-margin_bottom = 685.0
+margin_bottom = 670.0
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 1
@@ -38,5 +38,5 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="UI_HealthBar"]
-playback_speed = 0.2
-playback/speed = 0.2
+playback_speed = 8.0
+playback/speed = 8.0

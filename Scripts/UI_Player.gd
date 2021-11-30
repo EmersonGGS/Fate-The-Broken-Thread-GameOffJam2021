@@ -8,6 +8,3 @@ func UI_health_update(newValue):
 	var floatNewValue = float(CharacterState.health); 
 	healthbarTween.interpolate_property(ui_healthbar, "rect_scale", ui_healthbar.rect_scale, Vector2(floatNewValue / 100, 1),1)
 	healthbarTween.start()
-
-func player_death():
-	emit_signal("playerDeath")
