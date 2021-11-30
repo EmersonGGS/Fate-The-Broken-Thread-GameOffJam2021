@@ -11,7 +11,7 @@
 [ext_resource path="res://Animations/Player/stab.tres" type="Animation" id=9]
 [ext_resource path="res://Animations/Player/jumpUp.tres" type="Animation" id=10]
 [ext_resource path="res://Animations/Player/overhand.tres" type="Animation" id=11]
-[ext_resource path="res://Assets/DSKnight/overhand/tile009.png" type="Texture" id=12]
+[ext_resource path="res://Assets/DSKnight/overhand/tile005.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Audio/background_music.wav" type="AudioStream" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -21,6 +21,7 @@ extents = Vector2( 20.43, 31.4979 )
 extents = Vector2( 48.7558, 32.3333 )
 
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 3
 script = ExtResource( 1 )
 speed = Vector2( 800, 1000 )
 gravity = 2000.0

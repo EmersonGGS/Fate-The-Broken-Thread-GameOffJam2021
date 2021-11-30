@@ -11,8 +11,10 @@ onready var playerInBackRay = $RayChecks/PlayerInBackRay
 onready var animationPlayer = $AnimationPlayer
 onready var audioStreamPlayer = $AudioStreamPlayer2D
 
+onready var fctManager = $FCTMgr
+
 var velocity = Vector2.ZERO;
-var health = 30;
+var health = 100;
 
 export var enemyScale = 1.3;
 
@@ -27,6 +29,8 @@ onready var directionFacing = right;
 onready var isDead = false;
 var holeInFront = false;
 
+signal HealthUpdate
+signal BossDefeated
 # Sounds
 var monsterDiesSound = preload("../Assets/Audio/monster_dies.wav");
 
@@ -80,8 +84,9 @@ func enemy_decision ():
 func move_left():
 	if directionFacing == right:
 		scale.x = -scale.x
+		fctManager.scale.x = -fctManager.scale.x
 		directionFacing = left
-	animationPlayer.play("Walk")
+	animationPlayer.play("Run")
 #	print ("Walk")
 	state = left
 	pass
@@ -89,14 +94,15 @@ func move_left():
 func move_right():
 	if directionFacing == left:
 		scale.x = -scale.x
+		fctManager.scale.x = -fctManager.scale.x
 		directionFacing = right
-	animationPlayer.play("Walk")
+	animationPlayer.play("Run")
 #	print ("Walk")
 	state = right
 	pass
 
 func attack():
-	animationPlayer.play("Attack")
+	animationPlayer.play("FightAnimation")
 	state = attack
 	pass
 
@@ -111,16 +117,15 @@ func _physics_process(delta):
 	velocity.y += delta * gravity
 	if is_on_floor():
 		velocity.y = 0
-	if animationPlayer.current_animation == "Walk":
+	if animationPlayer.current_animation == "Run":
 		var timeStamp = animationPlayer.get_current_animation_position();
 #		print (timeStamp)
-		if timeStamp >= 0.6 and timeStamp <= 1.3:
-			if state == left:
-				velocity.x = -speed.x
-				velocity.y = 0
-			elif state == right:
-				velocity.x = speed.x
-				velocity.y = 0
+		if state == left:
+			velocity.x = -speed.x
+			velocity.y = 0
+		elif state == right:
+			velocity.x = speed.x
+			velocity.y = 0
 		else: velocity.x = 0
 	else: velocity.x = 0
 	move_and_slide(velocity, Vector2(0, -1))
@@ -160,6 +165,9 @@ func locate_player():
 func recieve_damage(damage, crit):
 	health -= damage;
 	$FCTMgr.show_value(damage, crit);
+	if health <= 0:
+		health = 0
+	emit_signal("HealthUpdate",health)
 	# function called from player or other damage causing nodes when detection is called
 	if (health <= 0):
 		destroy();
@@ -203,6 +211,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		else: animationPlayer.play("Idle")
 		
 	else:
+		emit_signal("BossDefeated")
 		print("insert function to track death into more global counter")
 		queue_free();
 

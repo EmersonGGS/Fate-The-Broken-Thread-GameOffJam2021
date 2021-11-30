@@ -12,6 +12,7 @@
 [resource]
 resource_name = "Run"
 length = 1.6
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("EnemySprite:texture")
 tracks/0/interp = 1
@@ -25,7 +26,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 8 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("CollisionPolygon2D:polygon")
+tracks/1/path = NodePath("BodyShape:polygon")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
