@@ -226,8 +226,8 @@ func _on_PlayerDetector_body_entered(body):
 
 func _on_AttackDetector_body_entered(body):
 	if body.name == "Player":
-		body.recieve_damage(100, false);
+		body.recieve_damage(4, false);
 
 func _on_HitBox_body_entered(body):
 	if body.name == "Player":
-		body.recieve_damage(100, false);
+		body.recieve_damage(4, false);

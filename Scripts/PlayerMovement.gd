@@ -152,9 +152,8 @@ func dealDamageToEnemy(body):
 		
 		
 func recieve_damage(damage, crit):
-#	CharacterState.health = clamp(CharacterState.health - damage,0,100);
+	CharacterState.health = clamp(CharacterState.health - damage,0,100);
 	$UI_Player.UI_health_update(CharacterState.health)
-#	$FCTMgr.show_value(damage, crit, directionFacing == left);
 	# function called from player or other damage causing nodes when detection is called
 	if (CharacterState.health <= 0):
 		set_physics_process(false)
