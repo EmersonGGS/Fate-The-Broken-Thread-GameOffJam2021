@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Player/heavyAttack.tres" type="Animation" id=2]
@@ -14,8 +14,9 @@
 [ext_resource path="res://Animations/Player/death.tres" type="Animation" id=12]
 [ext_resource path="res://Assets/Audio/background_music.wav" type="AudioStream" id=13]
 [ext_resource path="res://Scenes/UI_Player.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Assets/DSKnight/idle/tile000.png" type="Texture" id=15]
+[ext_resource path="res://Assets/DSKnight/hurt/tile000.png" type="Texture" id=15]
 [ext_resource path="res://Scenes/Fog.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Animations/Player/hurt.tres" type="Animation" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 85.3671, 29.7798 )
@@ -68,10 +69,14 @@ position = Vector2( 0, -7.84782 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 15 )
 
+[node name="HurtAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/hurt = ExtResource( 17 )
+
 [node name="CharacterSpriteAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/death = ExtResource( 12 )
 anims/falling = ExtResource( 5 )
 anims/heavyAttack = ExtResource( 2 )
+anims/hurt = ExtResource( 17 )
 anims/idle = ExtResource( 6 )
 anims/jumpLand = ExtResource( 8 )
 anims/jumpUp = ExtResource( 10 )
@@ -93,15 +98,14 @@ disabled = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 volume_db = -25.0
+pitch_scale = 0.9
 bus = "SoundEffect"
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 13 )
 autoplay = true
-bus = "BackgroundMusic"
 
 [node name="UI_Player" parent="." instance=ExtResource( 14 )]
-visible = false
 margin_left = -497.407
 margin_top = -355.159
 margin_right = 579.593
