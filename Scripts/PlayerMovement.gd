@@ -189,4 +189,4 @@ func _on_PickUpArea_body_entered(body):
 		set_physics_process(false);
 		characterSpriteAnimationPlayer.play("idle");
 		yield(get_tree().create_timer(1.2), "timeout")
-		get_tree().change_scene("res://Levels/LevelTemplate.tscn");
+		get_tree().change_scene("res://Levels/KnightBossRoom.tscn");
