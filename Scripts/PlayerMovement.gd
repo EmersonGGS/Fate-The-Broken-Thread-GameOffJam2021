@@ -33,12 +33,14 @@ var playerAttackInProgress = false;
 # Sprite/animation variables
 var characterSprite;
 var characterSpriteAnimationPlayer;
+var hurtAnimationPlayer;
 var audioStreamPlayer;
 
 # Sounds
 var attackImpactSound = preload("../Assets/Audio/attack_impact.wav");
 var keySound = preload("../Assets/Audio/key_pickup.wav");
 var doorSound = preload("../Assets/Audio/open_door.wav");
+var hitSound = preload("../Assets/Audio/player_hit.wav");
 var deathSound = preload("../Assets/Audio/player_dies.wav");
 
 var attackTimneout;
@@ -46,12 +48,11 @@ var attackTimneout;
 func _ready():
 	if fogOnViewer:
 		$Fog.show()
-	if displayUI:
-		$UI_Player.show()
 	set_physics_process(true)
 	audioStreamPlayer = $AudioStreamPlayer2D
 	characterSprite = $CharacterSprite
 	characterSpriteAnimationPlayer = $CharacterSpriteAnimationPlayer
+	hurtAnimationPlayer = $HurtAnimationPlayer
 	characterSpriteAnimationPlayer.play("idle");
 
 func _physics_process(delta: float) -> void:
@@ -130,14 +131,11 @@ func handle_animated_sprite_state() -> void:
 
 
 func _on_CharacterSpriteAnimationPlayer_animation_finished(anim_name):
-#	print(anim_name)
 	var isAnimationAnAttack = attackAnimations.find(anim_name, 0);
 	if isAnimationAnAttack >= 0:
-#		print('Starting attack combo timer...')
 		$attackTimer.start()
 
 func clear_player_state():
-#	print('clearing player state')
 	playerAttackInProgress = false;
 	playerState = playerStates.IDLE;
 	playerAttackIndex = 0;
@@ -153,11 +151,14 @@ func dealDamageToEnemy(body):
 		audioStreamPlayer.play();
 		
 		
+		
 func recieve_damage(damage, crit):
 	CharacterState.health = clamp(CharacterState.health - damage,0,100);
-	$UI_Player.UI_health_update(CharacterState.health)
-	emit_signal("healthUpdate", CharacterState.health)
-	print ("player health: ",CharacterState.health)
+	$UI_Player.UI_health_update(CharacterState.health);
+	hurtAnimationPlayer.play("hurt");
+	audioStreamPlayer.volume_db = 0.0
+	audioStreamPlayer.stream = hitSound;
+	audioStreamPlayer.play();
 	# function called from player or other damage causing nodes when detection is called
 	if (CharacterState.health <= 0):
 		set_physics_process(false)
@@ -165,7 +166,9 @@ func recieve_damage(damage, crit):
 		audioStreamPlayer.stream = deathSound;
 		audioStreamPlayer.play();
 		characterSpriteAnimationPlayer.play("death");
-		print(' Oh no... ')
+		yield(get_tree().create_timer(3), "timeout");
+		get_tree().reload_current_scene();
+
 
 func _on_attackTimer_timeout():
 	$attackTimer.stop();
@@ -179,7 +182,6 @@ func _on_AttackArea_area_entered(area):
 		dealDamageToEnemy(area.get_parent());
 
 func _on_PickUpArea_body_entered(body):
-	print("_on_PickUpArea_body_entered let me pick it up", body.name);
 	if(body.name == 'Key'):
 		CharacterState.foundKey = true;
 		audioStreamPlayer.volume_db = 0.0
@@ -194,6 +196,3 @@ func _on_PickUpArea_body_entered(body):
 		characterSpriteAnimationPlayer.play("idle");
 		yield(get_tree().create_timer(1.2), "timeout")
 		get_tree().change_scene("res://Levels/KnightBossRoom.tscn");
-		
-export var displayUI = true
-signal healthUpdate

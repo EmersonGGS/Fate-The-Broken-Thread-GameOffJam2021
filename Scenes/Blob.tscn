@@ -12,7 +12,7 @@
 [ext_resource path="res://Scenes/FCTMgr.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 44.0852, 22.3524 )
+extents = Vector2( 20.7697, 11.3442 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 20.4819, 12.9716 )
@@ -42,7 +42,7 @@ texture = ExtResource( 8 )
 position = Vector2( -3.1981, -6.6788 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2( 4.76837e-07, 0 )
+position = Vector2( 2.30769, 10.47 )
 shape = SubResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
