@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Player/heavyAttack.tres" type="Animation" id=2]
@@ -14,7 +14,10 @@
 [ext_resource path="res://Animations/Player/death.tres" type="Animation" id=12]
 [ext_resource path="res://Assets/Audio/background_music.wav" type="AudioStream" id=13]
 [ext_resource path="res://Scenes/UI_Player.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Assets/DSKnight/death/tile003.png" type="Texture" id=18]
+[ext_resource path="res://Assets/DSKnight/idle/tile000.png" type="Texture" id=15]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 85.3671, 29.7798 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20.43, 31.4979 )
@@ -26,6 +29,15 @@ extents = Vector2( 48.7558, 32.3333 )
 script = ExtResource( 1 )
 speed = Vector2( 800, 1000 )
 gravity = 2000.0
+
+[node name="PickUpArea" type="Area2D" parent="."]
+position = Vector2( 38.7144, 9.80492 )
+collision_layer = 0
+collision_mask = 8192
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpArea"]
+position = Vector2( -36.1983, -1.81981 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1.78381, 7.13524 )
@@ -47,7 +59,7 @@ shadow_item_cull_mask = 513
 [node name="CharacterSprite" type="Sprite" parent="."]
 position = Vector2( 0, -7.84782 )
 scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 18 )
+texture = ExtResource( 15 )
 
 [node name="CharacterSpriteAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/death = ExtResource( 12 )
@@ -80,12 +92,12 @@ stream = ExtResource( 13 )
 autoplay = true
 
 [node name="UI_Player" parent="." instance=ExtResource( 14 )]
-margin_left = -536.915
-margin_top = -348.988
-margin_right = 540.085
-margin_bottom = 366.012
+margin_left = -497.407
+margin_top = -355.159
+margin_right = 579.593
+margin_bottom = 359.841
 
+[connection signal="body_entered" from="PickUpArea" to="." method="_on_PickUpArea_body_entered"]
 [connection signal="animation_finished" from="CharacterSpriteAnimationPlayer" to="." method="_on_CharacterSpriteAnimationPlayer_animation_finished"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attackTimer_timeout"]
 [connection signal="area_entered" from="AttackArea" to="." method="_on_AttackArea_area_entered"]
-[connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]

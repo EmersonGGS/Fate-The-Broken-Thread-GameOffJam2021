@@ -12,7 +12,7 @@ func _ready():
 	rng = RandomNumberGenerator.new()
 	rng.seed = hash(randSeedNum())
 	print ("Seed Key State = ",rng.state)
-#	rng.state=   5428271222870414822
+#	rng.state=   5181551865004401639
 
 
 	##dEBUG:

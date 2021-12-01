@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/key_pickup.wav-49a139e5cfec705197cff63b48928430.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/key_pickup.wav"
+dest_files=[ "res://.import/key_pickup.wav-49a139e5cfec705197cff63b48928430.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
