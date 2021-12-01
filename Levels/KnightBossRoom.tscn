@@ -89,7 +89,6 @@ margin_bottom = 288.505
 position = Vector2( 591.699, 774.906 )
 collision_layer = 17411
 fogOnViewer = false
-displayUI = false
 
 [node name="Level" type="TileMap" parent="."]
 scale = Vector2( 4, 4 )

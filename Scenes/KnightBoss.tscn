@@ -1,14 +1,14 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/KnightBoss.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Enemies/Knight/Attack_01/Attack_01_07.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Enemies/Knight/Attack_01/Attack_01_01.png" type="Texture" id=2]
 [ext_resource path="res://Animations/KnightBoss/FightAnimation.tres" type="Animation" id=3]
 [ext_resource path="res://Animations/KnightBoss/Idle.tres" type="Animation" id=4]
 [ext_resource path="res://Animations/KnightBoss/Run.tres" type="Animation" id=5]
 [ext_resource path="res://Scenes/FCTMgr.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/FCTMgr.gd" type="Script" id=7]
 [ext_resource path="res://Animations/KnightBoss/Death.tres" type="Animation" id=8]
-[ext_resource path="res://Audio/SFX/Sword Swing 6_5 reverse.mp3" type="AudioStream" id=9]
+[ext_resource path="res://Audio/SFX/Sword Swing 6_5.wav" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16.2122, 37.8052 )
@@ -38,7 +38,7 @@ shape = SubResource( 1 )
 [node name="BodyShape" type="CollisionPolygon2D" parent="."]
 position = Vector2( -12.5805, -61.323 )
 scale = Vector2( 1.17281, 1.93026 )
-polygon = PoolVector2Array( 13.7064, 31.6412, 24.5992, 31.4737, 22.5309, 30.3846, 22.2552, 26.6984, 20.6006, 25.1067, 17.2914, 22.4258, 17.4293, 19.5774, 25.1507, 17.2317, 21.9794, 15.8075, 23.634, 12.2888, 20.8763, 10.6971, 20.3248, 7.17847, 19.6354, 3.91118, 17.705, 2.65454, 17.2914, 0.141237, 15.2231, -0.445198, 15.2231, 2.31943, 11.3624, 4.07874, 10.2593, 7.4298, 9.84569, 10.362, 6.53649, 11.87, 5.15766, 14.2157, 0.469625, 16.3101, 0.883278, 19.4098, 4.60612, 20.5827, 5.57131, 24.5202, 0.469625, 25.9444, -1.7365, 28.7928, -2.15016, 31.5574, 6.81227, 31.4737, 9.56993, 31.6412, 11.7761, 31.3061 )
+polygon = PoolVector2Array( 13.7064, 31.6412, 19.0839, 31.5575, 16.7399, 29.7981, 17.0156, 28.7928, 17.0156, 24.6878, 17.0156, 19.5774, 15.6368, 16.5615, 16.3262, 14.9697, 18.6702, 13.7968, 18.8081, 10.0269, 18.8081, 8.43513, 19.7733, 8.01624, 21.29, 9.18912, 22.531, 9.02156, 22.2552, 6.08938, 21.1521, 5.6705, 20.1869, 6.92715, 16.7399, 6.75959, 15.2231, 3.49231, 13.5685, -0.612741, 10.673, -2.87471, 10.3972, -5.22045, 9.15628, -5.55556, 8.74264, -2.79093, 6.26073, -1.95317, 3.91672, -0.69652, 3.67198, 4.84661, 0.469635, 7.84869, -1.87438, 10.4458, -1.18496, 14.1319, 3.64095, 16.8966, 3.36519, 19.8287, 4.74401, 23.85, 3.2273, 28.4577, 6.81227, 31.4737, 9.56993, 31.6412, 11.7761, 31.3061 )
 
 [node name="DecisionTimer" type="Timer" parent="."]
 wait_time = 5.0
@@ -74,13 +74,14 @@ position = Vector2( 39.9933, -23.5713 )
 shape = SubResource( 2 )
 
 [node name="AttackDetector" type="Area2D" parent="."]
+visible = false
 position = Vector2( 21.9231, -0.76923 )
 collision_layer = 524289
 collision_mask = 524289
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="AttackDetector"]
 position = Vector2( 10.6316, -34.9304 )
-polygon = PoolVector2Array( 55.3666, 14.5918, 49.7067, 10.2256, 33.5356, 7.63827, 1.67857, 5.37432, -13.684, 0.523003, -14.8159, 16.5324, 28.3608, 13.4599 )
+polygon = PoolVector2Array( 56.3052, 18.4729, 57.2755, 13.7833, 52.2625, 6.66801, 35.768, -11.767, 25.5802, -18.8823, 1.97039, -27.1296, -34.4146, -31.9809, -72.0616, -29.7169, -73.6787, -26.9678, -57.3459, -25.9976, -37.7789, -26.8061, -13.0371, -23.4102, 1.51685, -16.6184, 12.0281, 4.08064, 1.67857, 5.37432, -13.684, 0.523003, -13.8457, 18.3112, -7.49051, 34.2004, 23.3831, 35.8013, 28.1857, 36.2586, 54.9429, 34.2004 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Death = ExtResource( 8 )

@@ -4,6 +4,9 @@ extends KinematicBody2D
 export var speed = Vector2(500.0, 500.0)
 export var gravity = 1.0;
 export var fogOnViewer = true
+export var UI_displayed = true
+
+signal healthUpdate
 # Constants
 const JUMPFORCE = -950;
 
@@ -48,6 +51,8 @@ var attackTimneout;
 func _ready():
 	if fogOnViewer:
 		$Fog.show()
+	if UI_displayed:
+		$UI_Player.show()
 	set_physics_process(true)
 	audioStreamPlayer = $AudioStreamPlayer2D
 	characterSprite = $CharacterSprite
@@ -67,9 +72,9 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMPFORCE
 		velocity = move_and_slide(velocity, Vector2.UP,true,4,.78,false)
 		handle_animated_sprite_state()
-	if Input.is_action_just_pressed("Block"):
-		#debug, teleport character to mouse location
-		self.position = get_global_mouse_position()
+#	if Input.is_action_just_pressed("Block"):
+#		#debug, teleport character to mouse location
+#		self.position = get_global_mouse_position()
 
 
 func getDirection() -> Vector2:
@@ -155,6 +160,7 @@ func dealDamageToEnemy(body):
 func recieve_damage(damage, crit):
 	CharacterState.health = clamp(CharacterState.health - damage,0,100);
 	$UI_Player.UI_health_update(CharacterState.health);
+	emit_signal("healthUpdate",CharacterState.health)
 	hurtAnimationPlayer.play("hurt");
 	audioStreamPlayer.volume_db = 0.0
 	audioStreamPlayer.stream = hitSound;

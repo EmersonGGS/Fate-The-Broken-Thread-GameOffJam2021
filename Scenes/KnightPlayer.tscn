@@ -59,6 +59,7 @@ shadow_enabled = true
 shadow_item_cull_mask = 513
 
 [node name="Fog" parent="." instance=ExtResource( 16 )]
+visible = false
 margin_left = -700.573
 margin_top = -228.648
 margin_right = -700.573
@@ -106,6 +107,7 @@ stream = ExtResource( 13 )
 autoplay = true
 
 [node name="UI_Player" parent="." instance=ExtResource( 14 )]
+visible = false
 margin_left = -497.407
 margin_top = -355.159
 margin_right = 579.593
