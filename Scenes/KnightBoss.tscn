@@ -11,7 +11,7 @@
 [ext_resource path="res://Audio/SFX/Sword Swing 6_5.wav" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10.2507, 36.6 )
+extents = Vector2( 7.06958, 36.6 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 49.3833, 49.9308 )
@@ -76,6 +76,7 @@ shape = SubResource( 2 )
 [node name="AttackDetector" type="Area2D" parent="."]
 visible = false
 position = Vector2( 21.9231, -0.76923 )
+monitoring = false
 collision_layer = 524289
 collision_mask = 524289
 
