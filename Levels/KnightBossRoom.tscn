@@ -228,8 +228,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BGMusicPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="BGMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+bus = "BackgroundMusic"
 
 [connection signal="BossDefeated" from="Enemy" to="." method="_on_Enemy_BossDefeated"]
 [connection signal="BossDefeated" from="Enemy" to="Camera2D/Container" method="_on_Enemy_BossDefeated"]

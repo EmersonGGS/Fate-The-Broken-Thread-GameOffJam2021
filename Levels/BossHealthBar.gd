@@ -30,3 +30,7 @@ func _on_Enemy_HealthUpdate(newHealth):
 func _on_Enemy_BossDefeated():
 	animationPlayer.play("Win")
 	pass # Replace with function body.
+
+
+func _on_BGMusicPlayer_finished():
+	pass # Replace with function body.

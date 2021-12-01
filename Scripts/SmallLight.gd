@@ -26,16 +26,12 @@ func _ready():
 	pass # Replace with function body.
 
 func build_light ():
-	var lightList = animation.get_animation_list()
-	var randChoice = SeedGenerator.rng.randi_range(0,lightList.size()-1)
-	animation.play(lightList[randChoice])
-	
+#	var lightList = animation.get_animation_list()
+#	var randChoice = SeedGenerator.rng.randi_range(0,lightList.size()-1)
+#	animation.play(lightList[randChoice])
+	animation.play("Candle")
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
-
-func _on_AnimationPlayer_animation_finished(anim_name):
-	
-	pass # Replace with function body.

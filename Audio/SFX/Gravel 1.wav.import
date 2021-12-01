@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Gravel 1.wav-2d1c316c29869c6cc0cd6381b32379f7.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/Gravel 1.wav"
+dest_files=[ "res://.import/Gravel 1.wav-2d1c316c29869c6cc0cd6381b32379f7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

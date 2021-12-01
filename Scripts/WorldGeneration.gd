@@ -132,6 +132,7 @@ func build_all_rooms():
 				map[i][j].spawn_objects(randomAmountOfLights, "SmallLight")
 
 func core_item_spawn (path):
+	print (path)
 	var key_location = SeedGenerator.rng.randi_range(1,path.size()-1)
 	var door_location = SeedGenerator.rng.randi_range(1,path.size()-1)
 	if path.size() > 2:
@@ -141,7 +142,7 @@ func core_item_spawn (path):
 	map[path[key_location].x][path[key_location].x].spawn_objects(1,"Key")
 	map[path[door_location].x][path[door_location].x].spawn_objects(1,"Door")
 	for i in path.size()-1:
-		map[path[i].x][path[i].y].spawn_objects(20,"SmallLight")
+		map[path[i].x][path[i].y].spawn_objects(15,"SmallLight")
 ##############################################################################################
 #using a vector in the grid, checks to see if there are options on the cardinal directions:
 #1. if the room is already set (determined by the roomType of each room) then it won't change the room

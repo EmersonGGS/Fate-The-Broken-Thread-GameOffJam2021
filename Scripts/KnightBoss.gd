@@ -171,6 +171,7 @@ func recieve_damage(damage, crit):
 	# function called from player or other damage causing nodes when detection is called
 	if (health <= 0):
 		destroy();
+	
 
 func destroy():
 	

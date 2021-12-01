@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Sword Swing 6_5 reverse.mp3-120ab3c45027162cf0b48d6983c5cb41.mp3str"
+
+[deps]
+
+source_file="res://Audio/SFX/Sword Swing 6_5 reverse.mp3"
+dest_files=[ "res://.import/Sword Swing 6_5 reverse.mp3-120ab3c45027162cf0b48d6983c5cb41.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

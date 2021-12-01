@@ -10,6 +10,7 @@ var fightDone = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Player/Camera2D.current = false
+	bgMusicPlayer.play()
 	
 
 	pass # Replace with function body.
@@ -25,7 +26,7 @@ func _on_BGMusicPlayer_finished():
 		bgMusicPlayer.stream = load("res://Audio/Boss_Battle_1_Main.mp3")
 		bgMusicPlayer.play(0.0)
 		
-	
+	print ("1 loop done")
 	pass # Replace with function body.
 
 

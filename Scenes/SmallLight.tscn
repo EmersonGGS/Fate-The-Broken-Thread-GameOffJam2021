@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/SmallLight.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Objects/SmallLightObjects/Candle.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Objects/SmallLightObjects/LanternLight.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Objects/SmallLightObjects/CandleLight.png" type="Texture" id=4]
 [ext_resource path="res://Animations/Objects/Candle.tres" type="Animation" id=8]
 
@@ -16,16 +15,10 @@ texture = ExtResource( 2 )
 offset = Vector2( 32, 64 )
 
 [node name="CandleLight" type="Light2D" parent="LightModels"]
+modulate = Color( 1, 1, 1, 0.313575 )
 texture = ExtResource( 4 )
 offset = Vector2( 32, 64 )
 color = Color( 0.94902, 0.756863, 0, 1 )
 
-[node name="LanternLight" type="Light2D" parent="LightModels"]
-visible = false
-texture = ExtResource( 3 )
-offset = Vector2( 32, 64 )
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Candle = ExtResource( 8 )
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
