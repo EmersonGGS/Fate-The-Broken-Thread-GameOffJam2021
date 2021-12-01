@@ -172,7 +172,8 @@ func recieve_damage(damage, crit):
 		audioStreamPlayer.stream = deathSound;
 		audioStreamPlayer.play();
 		characterSpriteAnimationPlayer.play("death");
-		yield(get_tree().create_timer(3), "timeout");
+		CharacterState.health = 100;
+		yield(get_tree().create_timer(2), "timeout");
 		get_tree().reload_current_scene();
 
 
