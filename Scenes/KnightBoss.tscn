@@ -11,7 +11,7 @@
 [ext_resource path="res://Audio/SFX/Sword Swing 6_5.wav" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16.2122, 37.8052 )
+extents = Vector2( 10.2507, 36.6 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 49.3833, 49.9308 )
