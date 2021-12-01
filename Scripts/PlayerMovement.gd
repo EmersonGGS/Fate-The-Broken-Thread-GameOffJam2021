@@ -37,6 +37,9 @@ var audioStreamPlayer;
 
 # Sounds
 var attackImpactSound = preload("../Assets/Audio/attack_impact.wav");
+var keySound = preload("../Assets/Audio/key_pickup.wav");
+var doorSound = preload("../Assets/Audio/open_door.wav");
+var deathSound = preload("../Assets/Audio/player_dies.wav");
 
 var attackTimneout;
 
@@ -146,21 +149,45 @@ func dealDamageToEnemy(body):
 		body.recieve_damage(num, crit);
 		audioStreamPlayer.stream = attackImpactSound;
 		audioStreamPlayer.play();
-
+		
+		
+func recieve_damage(damage, crit):
+#	CharacterState.health = clamp(CharacterState.health - damage,0,100);
+	$UI_Player.UI_health_update(CharacterState.health)
+#	$FCTMgr.show_value(damage, crit, directionFacing == left);
+	# function called from player or other damage causing nodes when detection is called
+	if (CharacterState.health <= 0):
+		set_physics_process(false)
+		audioStreamPlayer.volume_db = 0.0
+		audioStreamPlayer.stream = deathSound;
+		audioStreamPlayer.play();
+		characterSpriteAnimationPlayer.play("death");
+		print(' Oh no... ')
 
 func _on_attackTimer_timeout():
 	$attackTimer.stop();
 	clear_player_state();
-#	print('we timed out!');
 
 func _on_WorldGeneration_set_spawn_point(spawnPoint):
 	position = spawnPoint;
-	
-
-func _on_AttackArea_body_entered(body):
-	pass
-#	dealDamageToEnemy(body);
 
 func _on_AttackArea_area_entered(area):
 	if (area.name == "HitBox"):
 		dealDamageToEnemy(area.get_parent());
+
+func _on_PickUpArea_body_entered(body):
+	print("_on_PickUpArea_body_entered let me pick it up", body.name);
+	if(body.name == 'Key'):
+		CharacterState.foundKey = true;
+		audioStreamPlayer.volume_db = 0.0
+		audioStreamPlayer.stream = keySound;
+		audioStreamPlayer.play();
+		body.get_parent().queue_free()
+	elif(body.name == 'Door' && CharacterState.foundKey):
+		audioStreamPlayer.volume_db = 0.0
+		audioStreamPlayer.stream = doorSound;
+		audioStreamPlayer.play();
+		set_physics_process(false);
+		characterSpriteAnimationPlayer.play("idle");
+		yield(get_tree().create_timer(1.2), "timeout")
+		get_tree().change_scene("res://Levels/LevelTemplate.tscn");
