@@ -118,6 +118,12 @@ __meta__ = {
 position = Vector2( 1807.6, 1113.6 )
 scale = Vector2( 2.5, 2.5 )
 
+[node name="UI_Player" parent="." instance=ExtResource( 10 )]
+margin_left = 134.033
+margin_top = -516.197
+margin_right = 1211.03
+margin_bottom = 198.803
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 1043.88, 657.197 )
 current = true
@@ -231,12 +237,6 @@ __meta__ = {
 [node name="BGMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 bus = "BackgroundMusic"
-
-[node name="UI_Player" parent="." instance=ExtResource( 10 )]
-margin_left = 134.033
-margin_top = -516.197
-margin_right = 1211.03
-margin_bottom = 198.803
 
 [connection signal="healthUpdate" from="Player" to="UI_Player" method="_on_Player_healthUpdate"]
 [connection signal="BossDefeated" from="Enemy" to="." method="_on_Enemy_BossDefeated"]

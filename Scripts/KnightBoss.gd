@@ -179,13 +179,13 @@ func destroy():
 	
 #	Stop animations in progress
 	animationPlayer.stop();
-	
+	$Timer.start()
 #	If idleTime is running, kill it
-	if(idleTime):
+	if(idleTime!=null):
 		idleTime.stop();
 		
 #	If moveTimer is running, kill it
-	if(moveTimer):
+	if(moveTimer != null):
 		moveTimer.stop();
 		
 #	Animate the death
@@ -229,3 +229,9 @@ func _on_AttackDetector_body_entered(body):
 func _on_HitBox_body_entered(body):
 	if body.name == "Player":
 		body.recieve_damage(8, false);
+
+
+func _on_Timer_timeout():
+	emit_signal("BossDefeated")
+	queue_free();
+	pass # Replace with function body.

@@ -1,20 +1,20 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/KnightBoss.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Enemies/Knight/Attack_01/Attack_01_01.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Enemies/Knight/Run/Run_01.png" type="Texture" id=2]
 [ext_resource path="res://Animations/KnightBoss/FightAnimation.tres" type="Animation" id=3]
 [ext_resource path="res://Animations/KnightBoss/Idle.tres" type="Animation" id=4]
 [ext_resource path="res://Animations/KnightBoss/Run.tres" type="Animation" id=5]
 [ext_resource path="res://Scenes/FCTMgr.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/FCTMgr.gd" type="Script" id=7]
 [ext_resource path="res://Animations/KnightBoss/Death.tres" type="Animation" id=8]
-[ext_resource path="res://Audio/SFX/Sword Swing 6_5.wav" type="AudioStream" id=9]
+[ext_resource path="res://Audio/SFX/Gravel 2.wav" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7.06958, 36.6 )
+extents = Vector2( 11.4574, 36.6 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 49.3833, 49.9308 )
+extents = Vector2( 70, 49.931 )
 
 [node name="Enemy" type="KinematicBody2D"]
 scale = Vector2( 1.3, 1.3 )
@@ -32,13 +32,16 @@ __meta__ = {
 position = Vector2( -2.10901, -23.0151 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2( 1.08909, -13.7951 )
+position = Vector2( 0.575678, -14.0518 )
 shape = SubResource( 1 )
 
 [node name="BodyShape" type="CollisionPolygon2D" parent="."]
 position = Vector2( -12.5805, -61.323 )
 scale = Vector2( 1.17281, 1.93026 )
-polygon = PoolVector2Array( 13.7064, 31.6412, 19.0839, 31.5575, 16.7399, 29.7981, 17.0156, 28.7928, 17.0156, 24.6878, 17.0156, 19.5774, 15.6368, 16.5615, 16.3262, 14.9697, 18.6702, 13.7968, 18.8081, 10.0269, 18.8081, 8.43513, 19.7733, 8.01624, 21.29, 9.18912, 22.531, 9.02156, 22.2552, 6.08938, 21.1521, 5.6705, 20.1869, 6.92715, 16.7399, 6.75959, 15.2231, 3.49231, 13.5685, -0.612741, 10.673, -2.87471, 10.3972, -5.22045, 9.15628, -5.55556, 8.74264, -2.79093, 6.26073, -1.95317, 3.91672, -0.69652, 3.67198, 4.84661, 0.469635, 7.84869, -1.87438, 10.4458, -1.18496, 14.1319, 3.64095, 16.8966, 3.36519, 19.8287, 4.74401, 23.85, 3.2273, 28.4577, 6.81227, 31.4737, 9.56993, 31.6412, 11.7761, 31.3061 )
+polygon = PoolVector2Array( 19.0214, 31.8726, 19.0121, 30.9854, 18.8081, 25.2742, 17.705, 17.8181, 16.1883, 15.975, 15.2231, 14.8859, 15.4989, 14.0482, 17.5672, 13.2104, 18.6702, 11.87, 19.4975, 7.01093, 21.7037, 7.51358, 22.0224, 4.68846, 20.8511, 4.68846, 19.8099, 5.63736, 16.0357, 5.24199, 15.4426, 2.90779, 13.7054, 2.54793, 13.3027, -1.9538, 10.8299, -3.29807, 10.0491, -6.54012, 8.35719, -6.46105, 8.60475, -3.9638, 5.7543, -2.42825, 4.06242, -1.08398, 3.67198, 4.84661, -2.13354, 7.11425, -3.52898, 10.9484, -2.15015, 15.221, -0.495545, 19.6612, 2.26212, 20.499, 0.193873, 25.6093, 0.0559874, 31.8088 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="DecisionTimer" type="Timer" parent="."]
 wait_time = 5.0
@@ -49,9 +52,12 @@ one_shot = true
 
 [node name="RayChecks" type="Node2D" parent="."]
 position = Vector2( 18.2763, -42.1707 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="PlayerInFrontRay" type="RayCast2D" parent="RayChecks"]
-position = Vector2( -13.3299, 22.1148 )
+position = Vector2( -14.6134, 22.1148 )
 scale = Vector2( 1, 20 )
 enabled = true
 cast_to = Vector2( 1000, 0 )
@@ -67,11 +73,17 @@ collision_mask = 2
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 524291
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 light_mask = 2
 position = Vector2( 39.9933, -23.5713 )
 shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="AttackDetector" type="Area2D" parent="."]
 visible = false
@@ -79,6 +91,9 @@ position = Vector2( 21.9231, -0.76923 )
 monitoring = false
 collision_layer = 524289
 collision_mask = 524289
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="AttackDetector"]
 position = Vector2( 10.6316, -34.9304 )
@@ -100,9 +115,14 @@ scale = Vector2( 0.769231, 0.769231 )
 script = ExtResource( 7 )
 duration = 1
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
 [connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_DecisionTimer_timeout"]
 [connection signal="timeout" from="MovementTimer" to="." method="_on_MovementTimer_timeout"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_entered" from="AttackDetector" to="." method="_on_AttackDetector_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
