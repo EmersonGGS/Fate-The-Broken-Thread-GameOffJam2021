@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/KnightPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/KnightBoss.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/UI/BlackoutScreen.jpg" type="Texture" id=7]
 [ext_resource path="res://Fonts/normalText.tres" type="DynamicFont" id=8]
 [ext_resource path="res://Audio/Boss_Battle_1_Intro.mp3" type="AudioStream" id=9]
+[ext_resource path="res://Scenes/UI_Player.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Fog.tscn" type="PackedScene" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -88,6 +89,7 @@ margin_bottom = 288.505
 position = Vector2( 591.699, 774.906 )
 collision_layer = 17411
 fogOnViewer = false
+displayUI = false
 
 [node name="Level" type="TileMap" parent="."]
 scale = Vector2( 4, 4 )
@@ -230,6 +232,13 @@ __meta__ = {
 stream = ExtResource( 9 )
 bus = "BackgroundMusic"
 
+[node name="UI_Player" parent="." instance=ExtResource( 10 )]
+margin_left = 134.033
+margin_top = -516.197
+margin_right = 1211.03
+margin_bottom = 198.803
+
+[connection signal="healthUpdate" from="Player" to="UI_Player" method="_on_Player_healthUpdate"]
 [connection signal="BossDefeated" from="Enemy" to="." method="_on_Enemy_BossDefeated"]
 [connection signal="BossDefeated" from="Enemy" to="Camera2D/Container" method="_on_Enemy_BossDefeated"]
 [connection signal="HealthUpdate" from="Enemy" to="Camera2D/Container" method="_on_Enemy_HealthUpdate"]

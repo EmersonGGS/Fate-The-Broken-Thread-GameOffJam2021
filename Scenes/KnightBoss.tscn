@@ -1,17 +1,17 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/KnightBoss.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Enemies/Knight/Run/Run_01.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Enemies/Knight/Attack_01/Attack_01_07.png" type="Texture" id=2]
 [ext_resource path="res://Animations/KnightBoss/FightAnimation.tres" type="Animation" id=3]
 [ext_resource path="res://Animations/KnightBoss/Idle.tres" type="Animation" id=4]
 [ext_resource path="res://Animations/KnightBoss/Run.tres" type="Animation" id=5]
 [ext_resource path="res://Scenes/FCTMgr.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/FCTMgr.gd" type="Script" id=7]
 [ext_resource path="res://Animations/KnightBoss/Death.tres" type="Animation" id=8]
-[ext_resource path="res://Audio/SFX/Gravel 2.wav" type="AudioStream" id=9]
+[ext_resource path="res://Audio/SFX/Sword Swing 6_5 reverse.mp3" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14.9552, 33.1753 )
+extents = Vector2( 16.2122, 37.8052 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 49.3833, 49.9308 )
@@ -38,7 +38,7 @@ shape = SubResource( 1 )
 [node name="BodyShape" type="CollisionPolygon2D" parent="."]
 position = Vector2( -12.5805, -61.323 )
 scale = Vector2( 1.17281, 1.93026 )
-polygon = PoolVector2Array( 19.0214, 31.8726, 19.0121, 30.9854, 18.8081, 25.2742, 17.705, 17.8181, 16.1883, 15.975, 15.2231, 14.8859, 15.4989, 14.0482, 17.5672, 13.2104, 18.6702, 11.87, 19.4975, 7.01093, 21.7037, 7.51358, 22.0224, 4.68846, 20.8511, 4.68846, 19.8099, 5.63736, 16.0357, 5.24199, 15.4426, 2.90779, 13.7054, 2.54793, 13.3027, -1.9538, 10.8299, -3.29807, 10.0491, -6.54012, 8.35719, -6.46105, 8.60475, -3.9638, 5.7543, -2.42825, 4.06242, -1.08398, 3.67198, 4.84661, -2.13354, 7.11425, -3.52898, 10.9484, -2.15015, 15.221, -0.495545, 19.6612, 2.26212, 20.499, 0.193873, 25.6093, 0.0559874, 31.8088 )
+polygon = PoolVector2Array( 13.7064, 31.6412, 24.5992, 31.4737, 22.5309, 30.3846, 22.2552, 26.6984, 20.6006, 25.1067, 17.2914, 22.4258, 17.4293, 19.5774, 25.1507, 17.2317, 21.9794, 15.8075, 23.634, 12.2888, 20.8763, 10.6971, 20.3248, 7.17847, 19.6354, 3.91118, 17.705, 2.65454, 17.2914, 0.141237, 15.2231, -0.445198, 15.2231, 2.31943, 11.3624, 4.07874, 10.2593, 7.4298, 9.84569, 10.362, 6.53649, 11.87, 5.15766, 14.2157, 0.469625, 16.3101, 0.883278, 19.4098, 4.60612, 20.5827, 5.57131, 24.5202, 0.469625, 25.9444, -1.7365, 28.7928, -2.15016, 31.5574, 6.81227, 31.4737, 9.56993, 31.6412, 11.7761, 31.3061 )
 
 [node name="DecisionTimer" type="Timer" parent="."]
 wait_time = 5.0
@@ -74,15 +74,13 @@ position = Vector2( 39.9933, -23.5713 )
 shape = SubResource( 2 )
 
 [node name="AttackDetector" type="Area2D" parent="."]
-visible = false
 position = Vector2( 21.9231, -0.76923 )
-monitoring = false
-collision_layer = 524291
-collision_mask = 786434
+collision_layer = 524289
+collision_mask = 524289
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="AttackDetector"]
 position = Vector2( 10.6316, -34.9304 )
-polygon = PoolVector2Array( 56.3052, 18.4729, 57.2755, 13.7833, 52.2625, 6.66801, 35.768, -11.767, 25.5802, -18.8823, 1.97039, -27.1296, -34.4146, -31.9809, -72.0616, -29.7169, -73.6787, -26.9678, -57.3459, -25.9976, -37.7789, -26.8061, -13.0371, -23.4102, 1.51685, -16.6184, 12.0281, 4.08064, 1.67857, 5.37432, -13.684, 0.523003, -13.8457, 18.3112, 23.5095, 19.4432, 25.4501, 22.1923, 27.3906, 21.3837, 27.3906, 18.6346 )
+polygon = PoolVector2Array( 55.3666, 14.5918, 49.7067, 10.2256, 33.5356, 7.63827, 1.67857, 5.37432, -13.684, 0.523003, -14.8159, 16.5324, 28.3608, 13.4599 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Death = ExtResource( 8 )
@@ -100,6 +98,7 @@ scale = Vector2( 0.769231, 0.769231 )
 script = ExtResource( 7 )
 duration = 1
 
+[connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_DecisionTimer_timeout"]
 [connection signal="timeout" from="MovementTimer" to="." method="_on_MovementTimer_timeout"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]

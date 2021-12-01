@@ -46,6 +46,8 @@ var attackTimneout;
 func _ready():
 	if fogOnViewer:
 		$Fog.show()
+	if displayUI:
+		$UI_Player.show()
 	set_physics_process(true)
 	audioStreamPlayer = $AudioStreamPlayer2D
 	characterSprite = $CharacterSprite
@@ -154,6 +156,8 @@ func dealDamageToEnemy(body):
 func recieve_damage(damage, crit):
 	CharacterState.health = clamp(CharacterState.health - damage,0,100);
 	$UI_Player.UI_health_update(CharacterState.health)
+	emit_signal("healthUpdate", CharacterState.health)
+	print ("player health: ",CharacterState.health)
 	# function called from player or other damage causing nodes when detection is called
 	if (CharacterState.health <= 0):
 		set_physics_process(false)
@@ -190,3 +194,6 @@ func _on_PickUpArea_body_entered(body):
 		characterSpriteAnimationPlayer.play("idle");
 		yield(get_tree().create_timer(1.2), "timeout")
 		get_tree().change_scene("res://Levels/KnightBossRoom.tscn");
+		
+export var displayUI = true
+signal healthUpdate

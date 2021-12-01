@@ -11,9 +11,9 @@ func show_value(value, crit=false, shouldScale=false):
 	print(shouldScale)
 	print(scale)
 	if (shouldScale):
-		scale.x = -1
+		scale.x = - scale.x
 	else:
-		scale.x = 1
+		scale.x = - scale.x
 		
 	add_child(fct);
 	print(scale)

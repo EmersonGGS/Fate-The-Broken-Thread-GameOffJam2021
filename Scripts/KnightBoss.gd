@@ -84,7 +84,7 @@ func enemy_decision ():
 func move_left():
 	if directionFacing == right:
 		scale.x = -scale.x
-		fctManager.scale.x = -fctManager.scale.x
+#		fctManager.scale.x = -fctManager.scale.x
 		directionFacing = left
 	animationPlayer.play("Run")
 #	print ("Walk")
@@ -94,7 +94,7 @@ func move_left():
 func move_right():
 	if directionFacing == left:
 		scale.x = -scale.x
-		fctManager.scale.x = -fctManager.scale.x
+#		fctManager.scale.x = -fctManager.scale.x
 		directionFacing = right
 	animationPlayer.play("Run")
 #	print ("Walk")
@@ -163,8 +163,8 @@ func locate_player():
 	return null;
 
 func recieve_damage(damage, crit):
-	health -= damage;
-	$FCTMgr.show_value(damage, crit);
+	health -= round(damage/2);
+	$FCTMgr.show_value(round(damage/2), crit, directionFacing == left);
 	if health <= 0:
 		health = 0
 	emit_signal("HealthUpdate",health)
@@ -224,4 +224,8 @@ func _on_PlayerDetector_body_entered(body):
 
 func _on_AttackDetector_body_entered(body):
 	if body.name == "Player":
-		print ("Placeholder for Damage")
+		body.recieve_damage(12, false);
+
+func _on_HitBox_body_entered(body):
+	if body.name == "Player":
+		body.recieve_damage(8, false);

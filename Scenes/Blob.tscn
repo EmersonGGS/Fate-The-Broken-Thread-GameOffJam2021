@@ -126,6 +126,7 @@ anims/Idle = ExtResource( 5 )
 anims/Walk = ExtResource( 4 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = "SoundEffect"
 __meta__ = {
 "_edit_lock_": true
 }
